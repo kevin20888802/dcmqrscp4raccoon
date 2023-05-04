@@ -1,0 +1,8 @@
+.vs/
+#dcmqrscpMongoDB/.vs/
+#dcmqrscpMongoDB/bin/Debug/
+#dcmqrscpMongoDB/dcmtk-3.6.7/dcmrt/libsrc/dcmrt.dir/Debug/
+#dcmqrscpMongoDB/dcmtk-3.6.7/dcmdata/libsrc/dcmdata.dir/Debug/
+#dcmqrscpMongoDB/dcmtk-3.6.7/dcmimgle/libsrc/dcmimgle.dir/Debug/
+#dcmqrscpMongoDB/dcmtk-3.6.7/dcmsr/libsrc/dcmsr.dir/Debug/
+dcmqrscp4raccoon/

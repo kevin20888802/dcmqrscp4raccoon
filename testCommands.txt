@@ -1,0 +1,5 @@
+echoscu -d 127.0.0.1 6066 -aet aet1 -aec MYSTORESCP
+storescu.exe -aet aet1 -aec MYSTORESCP 127.0.0.1 6066 D:\Programming\dicomfile\Image0001.dcm
+dcmsend -aet aet1 -aec MYSTORESCP -v 127.0.0.1 6066 +sd --read-from-dicomdir D:\Programming\dicomfile\test1\
+movescu.exe --port 5678 -od D:\Programming\C++\dcmtk-3.6.7\bin\Debug\dicomFiles -aet aet2 -aec MYSTORESCP -P -k 0008,0052=PATIENT -k 0010,0010=ENT00373 127.0.0.1 6066
+findscu.exe -aec MYSTORESCP -P -k 0008,0052=PATIENT -k 0010,0010=ENT00373 127.0.0.1 6066
