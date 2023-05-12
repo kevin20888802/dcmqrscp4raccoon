@@ -118,6 +118,7 @@ static int NbFindAttr = ((sizeof (TbFindAttr)) / (sizeof (TbFindAttr [0])));
 const char* conn_string = "mongodb://127.0.0.1/?appname=dcmqrscp4raccoon";
 const char* mongoDB_name = "raccoon_polka";
 const char* collection_name = "dicom";
+const char* DICOM_STORE_ROOTPATH = "";
 
 /*
 Visual C++ 編譯時，遇到「無法解析的外部符號」
@@ -650,25 +651,29 @@ OFConditionConst mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_Elemen
         {
             if (plist->elem.PValueField.ptr.p != NULL)
             {
-                std::string queryKey = "param.";
-                std::string xtag = int_to_hex(plist->elem.XTag.key[0]) + "," + int_to_hex(plist->elem.XTag.key[1]);
-                queryKey = queryKey + xtag + ".PValueField.p";
-                std::cout << "query++=" << queryKey << std::endl;
-                std::cout << "query++=" << plist->elem.PValueField.ptr.p << std::endl;
+                std::string xtag = int_to_hex(plist->elem.XTag.key[0]) + int_to_hex(plist->elem.XTag.key[1]);
+                transform(xtag.begin(), xtag.end(), xtag.begin(), ::toupper);
+                std::string queryKey = xtag + ".Value.0";
+
                 std::string queryValue = plist->elem.PValueField.ptr.p;
                 queryValue = "^" + queryValue;
                 queryValue = ReplaceString(queryValue, "*", ".*");
                 queryValue = ReplaceString(queryValue, "?", ".");
-                std::cout << "queryVal++=" << queryValue << std::endl;
-                if (strcmp(xtag.c_str(), "0020,000d") != 0)
-                {
 
-                    //BSON_APPEND_UTF8(query, queryKey.c_str(), plist->elem.PValueField.ptr.p);
-                    bson_append_regex(query, queryKey.c_str(), -1, queryValue.c_str(), "");
+
+                std::cout << queryKey << "," << queryValue << std::endl;
+                if (strcmp(xtag.c_str(), "0020000D") == 0)
+                {
+                    BSON_APPEND_UTF8(query, queryKey.c_str(), plist->elem.PValueField.ptr.p);
+                }
+                else if (strcmp(xtag.c_str(), "00100010") == 0)
+                {
+                    std::string queryKey2 = xtag + ".Value.0.Alphabetic";
+                    bson_append_regex(query, queryKey2.c_str(), -1, queryValue.c_str(), "");
                 }
                 else
                 {
-                    BSON_APPEND_UTF8(query, queryKey.c_str(), plist->elem.PValueField.ptr.p);
+                    bson_append_regex(query, queryKey.c_str(), -1, queryValue.c_str(), "");
                 }
             }
         }
