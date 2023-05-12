@@ -115,10 +115,110 @@ static int NbFindAttr = ((sizeof (TbFindAttr)) / (sizeof (TbFindAttr [0])));
 */
 
 // Mongo 連線網址
-const char* conn_string = "mongodb://127.0.0.1/?appname=dcmqrscp4raccoon";
-const char* mongoDB_name = "raccoon_polka";
-const char* collection_name = "dicom";
-const char* DICOM_STORE_ROOTPATH = "";
+std::string conn_string = "mongodb://127.0.0.1/?appname=dcmqrscp4raccoon";
+std::string mongoDB_name = "raccoon_polka";
+std::string collection_name = "dicom";
+std::string DICOM_STORE_ROOTPATH = "D:/Programming/Nodejs/raccoon/files/";
+
+#ifdef _WIN32 // Windows
+
+#include <windows.h>
+
+std::string getExecutablePath() {
+    char exePath[MAX_PATH];
+    DWORD pathLength = GetModuleFileName(NULL, exePath, MAX_PATH);
+
+    if (pathLength == 0) {
+        std::cout << "Failed to retrieve executable path." << std::endl;
+        exit(1);
+    }
+
+    std::string exeDirectory = std::string(exePath);
+    std::size_t lastSlashPos = exeDirectory.find_last_of("\\/");
+
+    if (lastSlashPos == std::string::npos) {
+        std::cout << "Invalid executable path." << std::endl;
+        exit(1);
+    }
+
+    return exeDirectory.substr(0, lastSlashPos + 1);
+}
+
+#elif defined(__linux__) // Linux
+
+#include <unistd.h>
+#include <limits.h>
+
+std::string getExecutablePath() {
+    char exePath[PATH_MAX];
+    ssize_t pathLength = readlink("/proc/self/exe", exePath, sizeof(exePath));
+
+    if (pathLength == -1) {
+        std::cout << "Failed to retrieve executable path." << std::endl;
+        exit(1);
+    }
+
+    std::string exeDirectory = std::string(exePath, pathLength);
+    std::size_t lastSlashPos = exeDirectory.find_last_of("\\/");
+
+    if (lastSlashPos == std::string::npos) {
+        std::cout << "Invalid executable path." << std::endl;
+        exit(1);
+    }
+
+    return exeDirectory.substr(0, lastSlashPos + 1);
+}
+
+#else
+#error Unsupported platform
+#endif
+
+void ReadMongoConfig()
+{
+    std::string exeDirectory = getExecutablePath();
+
+    std::string configFilePath = exeDirectory + "dcmqrscpMongoConfig.cfg";
+
+    std::ifstream config_file(configFilePath);
+    std::cout << "config path=" << configFilePath << std::endl;
+    if (!config_file.is_open()) {
+        std::cout << "Failed to open mongo config file." << std::endl;
+    }
+
+    std::string line;
+    while (std::getline(config_file, line)) {
+        size_t delimiter_pos = line.find('=');
+        if (delimiter_pos != std::string::npos) {
+            std::string key = line.substr(0, delimiter_pos);
+            std::string value = line.substr(delimiter_pos + 1);
+
+            if (key == "conn_string") {
+                //strcpy(conn_string, value.c_str());
+                conn_string = value;
+            }
+            else if (key == "mongoDB_name") {
+                //strcpy(mongoDB_name, value.c_str());
+                mongoDB_name = value;
+            }
+            else if (key == "collection_name") {
+                //strcpy(collection_name, value.c_str());
+                collection_name = value;
+            }
+            else if (key == "DICOM_STORE_ROOTPATH") {
+                //strcpy(DICOM_STORE_ROOTPATH, value.c_str());
+                DICOM_STORE_ROOTPATH = value;
+            }
+        }
+    }
+
+    config_file.close();
+
+    // 印出讀取後的變數值
+    std::cout << "conn_string: " << conn_string << std::endl;
+    std::cout << "mongoDB_name: " << mongoDB_name << std::endl;
+    std::cout << "collection_name: " << collection_name << std::endl;
+    std::cout << "DICOM_STORE_ROOTPATH: " << DICOM_STORE_ROOTPATH << std::endl;
+}
 
 /*
 Visual C++ 編譯時，遇到「無法解析的外部符號」
@@ -413,8 +513,6 @@ void GetParamInBson(const bson_t* i_bson, bson_iter_t& iter, std::string tag, ch
                                     if (bson_iter_init_find(&value_iter, array_document, "Alphabetic") && BSON_ITER_HOLDS_UTF8(&value_iter)) 
                                     {
                                         const char* alphabetic_value = bson_iter_utf8(&value_iter, NULL);
-                                        printf("Value of 'Alphabetic': %s\n", alphabetic_value);
-                                        std::cout << bson_iter_utf8(&value_iter, 0) << std::endl;
                                         strcpy(&dest, bson_iter_utf8(&value_iter, 0));
                                         break;
                                     }
@@ -425,7 +523,6 @@ void GetParamInBson(const bson_t* i_bson, bson_iter_t& iter, std::string tag, ch
                             {
                                 if (BSON_ITER_HOLDS_UTF8(&array_iter))
                                 {
-                                    std::cout << bson_iter_utf8(&array_iter, 0) << std::endl;
                                     strcpy(&dest, bson_iter_utf8(&array_iter, 0));
                                 }
                                 else if (BSON_ITER_HOLDS_DATE_TIME(&array_iter))
@@ -439,7 +536,6 @@ void GetParamInBson(const bson_t* i_bson, bson_iter_t& iter, std::string tag, ch
                                     strftime(buffer, sizeof(buffer), "%Y%m%d", tm_info);
 
                                     std::string formattedDate(buffer);
-                                    std::cout << "Formatted Date: " << formattedDate << std::endl;
                                     strcpy(&dest, formattedDate.c_str());
                                 }
                             }
@@ -462,7 +558,11 @@ IdxRecord* bson_to_idx_record(const bson_t* i_bson, IdxRecord& theRec)
     bson_iter_t iter;
     if (bson_iter_init(&iter, i_bson)) {
         while (bson_iter_next(&iter)) {
-            (strcmp(bson_iter_key(&iter), "instancePath") == 0) ? strcpy(theRec.filename, bson_iter_utf8(&iter, 0)) : "";
+            if (strcmp(bson_iter_key(&iter), "instancePath") == 0)
+            {
+                std::string filename = std::string(DICOM_STORE_ROOTPATH) + '/' + std::string(bson_iter_utf8(&iter, 0));
+                strcpy(theRec.filename, filename.c_str());
+            }
             GetParamInBson(i_bson,iter,"00080016",*theRec.SOPClassUID); //(strcmp(bson_iter_key(&iter), "SOPClassUID") == 0) ? strcpy(theRec.SOPClassUID, bson_iter_utf8(&iter, 0)) : "";
             //(strcmp(bson_iter_key(&iter), "RecordedDate") == 0) ? theRec.RecordedDate = bson_iter_double(&iter) : 0.0;
             //(strcmp(bson_iter_key(&iter), "ImageSize") == 0) ? theRec.ImageSize = bson_iter_int32(&iter) : 0;
@@ -510,12 +610,6 @@ IdxRecord* bson_to_idx_record(const bson_t* i_bson, IdxRecord& theRec)
         }
     }
     DB_IdxInitRecord(&theRec, 1);
-
-    std::string ccc(theRec.filename);
-    printf("theRec Filename=%s\n", theRec.filename);
-    std::cout << "RECORDIDX_SeriesInstanceUID=" << theRec.StudyInstanceUID << std::endl;
-    std::cout << "RECORDIDX_SeriesInstanceUID=" << theRec.param[RECORDIDX_SeriesDate].PValueField.ptr.p << std::endl;
-    std::cout << "theRec FILENAME=" << theRec.filename << "\n";
     return &theRec;
 }
 
@@ -530,22 +624,21 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
     DB_ElementList* plist;
     DB_LEVEL    XTagLevel = PATIENT_LEVEL; // DB_GetTagLevel() will set this correctly
     OFBool foundAnything = OFFalse;
-
+    ReadMongoConfig();
     std::cout << "start mongodb find" << "" << std::endl;
 
     // MongoDB連接
     mongoc_client_t* mongoClient;
-    mongoc_database_t* db;
     mongoc_uri_t* uri;
     bson_error_t mongoError;
 
     mongoc_init();
-    uri = mongoc_uri_new_with_error(conn_string, &mongoError);
+    uri = mongoc_uri_new_with_error(conn_string.c_str(), &mongoError);
     if (!uri) {
         fprintf(stderr,
             "failed to parse URI: %s\n"
             "error message:       %s\n",
-            conn_string,
+            conn_string.c_str(),
             mongoError.message);
         std::cout << "mongodb uri error" << "" << std::endl;
     }
@@ -570,7 +663,7 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
                 queryValue = ReplaceString(queryValue, "?", ".");
 
 
-                std::cout << queryKey << "," << queryValue << std::endl;
+                //std::cout << queryKey << "," << queryValue << std::endl;
                 if (strcmp(xtag.c_str(), "0020000D") == 0)
                 {
                     BSON_APPEND_UTF8(query, queryKey.c_str(), plist->elem.PValueField.ptr.p);
@@ -588,7 +681,7 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
         }
 
         mongoc_collection_t* collection;
-        collection = mongoc_client_get_collection(mongoClient, mongoDB_name, collection_name);
+        collection = mongoc_client_get_collection(mongoClient, mongoDB_name.c_str(), collection_name.c_str());
         mongoc_cursor_t* cursor;
         const bson_t* resultBson;
         resultBson = bson_new();
@@ -599,7 +692,7 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
             bson_free(str);
             // Convert Bson to IdxRecord.
             bson_to_idx_record(resultBson, idxRec);
-            std::cout << "idxRec FILENAME=" << idxRec.filename << "\n";
+            //std::cout << "idxRec FILENAME=" << idxRec.filename << "\n";
             if (DB_UIDAlreadyFound(handle_, &idxRec))
             {
                 continue;
@@ -611,32 +704,44 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
             }
         }
         std::cout << "ending mongodb find" << "" << std::endl;
+
+        // 釋放記憶體
+        bson_destroy(query);
+        mongoc_cursor_destroy(cursor);
+        mongoc_collection_destroy(collection);
     }
     else
     {
         std::cout << "mongodb client error" << "" << std::endl;
     }
-    return foundAnything;
 
+    // 釋放記憶體
+    mongoc_uri_destroy(uri);
+    mongoc_client_destroy(mongoClient);
+
+    mongoc_cleanup();
+
+    return foundAnything;
 }
 
 
 OFConditionConst mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_ElementList* plist, DB_CounterList* pidxlist, DB_CounterList* lastidxlist, DcmQueryRetrieveDatabaseStatus* status)
 {
+    ReadMongoConfig();
     // Find and get Records from mongodb
-// MongoDB連接
+    // MongoDB連接
 
     mongoc_client_t* mongoClient;
     mongoc_database_t* db;
     mongoc_uri_t* uri;
     bson_error_t mongoError;
     mongoc_init();
-    uri = mongoc_uri_new_with_error(conn_string, &mongoError);
+    uri = mongoc_uri_new_with_error(conn_string.c_str(), &mongoError);
     if (!uri) {
         fprintf(stderr,
             "failed to parse URI: %s\n"
             "error message:       %s\n",
-            conn_string,
+            conn_string.c_str(),
             mongoError.message);
         std::cout << "mongodb uri error" << "" << std::endl;
     }
@@ -660,8 +765,6 @@ OFConditionConst mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_Elemen
                 queryValue = ReplaceString(queryValue, "*", ".*");
                 queryValue = ReplaceString(queryValue, "?", ".");
 
-
-                std::cout << queryKey << "," << queryValue << std::endl;
                 if (strcmp(xtag.c_str(), "0020000D") == 0)
                 {
                     BSON_APPEND_UTF8(query, queryKey.c_str(), plist->elem.PValueField.ptr.p);
@@ -679,7 +782,7 @@ OFConditionConst mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_Elemen
         }
 
         mongoc_collection_t* collection;
-        collection = mongoc_client_get_collection(mongoClient, mongoDB_name, collection_name);
+        collection = mongoc_client_get_collection(mongoClient, mongoDB_name.c_str(), collection_name.c_str());
         mongoc_cursor_t* cursor;
         const bson_t* resultBson;
         resultBson = bson_new();
@@ -697,7 +800,6 @@ OFConditionConst mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_Elemen
 
             pidxlist->rec = new IdxRecord();
             bson_to_idx_record(resultBson, *pidxlist->rec);
-            std::cout << "Move idxRec FILENAME=" << pidxlist->rec->filename << "\n";
 
             pidxlist->next = NULL;
             //pidxlist->idxCounter = handle_->idxCounter;
@@ -713,11 +815,21 @@ OFConditionConst mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_Elemen
             }
         }
         std::cout << "ending mongodb find" << "" << std::endl;
+
+        // 釋放記憶體
+        bson_destroy(query);
+        mongoc_cursor_destroy(cursor);
+        mongoc_collection_destroy(collection);
     }
     else
     {
         std::cout << "mongodb client error" << "" << std::endl;
     }
+    // 釋放記憶體
+    mongoc_uri_destroy(uri);
+    mongoc_client_destroy(mongoClient);
+
+    mongoc_cleanup();
 }
 
 #pragma endregion
