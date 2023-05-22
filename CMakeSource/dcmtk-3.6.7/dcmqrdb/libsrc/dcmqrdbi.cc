@@ -771,16 +771,15 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
 }
 
 
-OFConditionConst mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_ElementList* plist, DB_CounterList* pidxlist, DB_CounterList* lastidxlist, DcmQueryRetrieveDatabaseStatus* status)
+static void mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_ElementList* plist, DB_CounterList* pidxlist, DB_CounterList* lastidxlist, DcmQueryRetrieveDatabaseStatus* status)
 {
-    ReadMongoConfig();
-
     // Find and get Records from mongodb
     // MongoDB³s±µ
     mongoc_client_t* mongoClient;
     mongoc_database_t* db;
     mongoc_uri_t* uri;
     bson_error_t mongoError;
+
     mongoc_init();
     uri = mongoc_uri_new_with_error(conn_string.c_str(), &mongoError);
     if (!uri) {
@@ -810,6 +809,9 @@ OFConditionConst mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_Elemen
                 queryValue = "^" + queryValue;
                 queryValue = ReplaceString(queryValue, "*", ".*");
                 queryValue = ReplaceString(queryValue, "?", ".");
+
+                ConsoleLog("QueryKey[" + queryKey + "]", "");
+                ConsoleLog("QueryValue[" + queryValue + "]", "");
 
                 if (strcmp(xtag.c_str(), "0020000D") == 0)
                 {
@@ -841,11 +843,11 @@ OFConditionConst mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_Elemen
             pidxlist = (DB_CounterList*)malloc(sizeof(DB_CounterList));
             if (pidxlist == NULL) {
                 status->setStatus(STATUS_FIND_Refused_OutOfResources);
-                return (QR_EC_IndexDatabaseError);
+                //return (QR_EC_IndexDatabaseError);
             }
 
             pidxlist->rec = new IdxRecord();
-            bson_to_idx_record(resultBson, *pidxlist->rec);
+            //bson_to_idx_record(resultBson, *pidxlist->rec);
 
             pidxlist->next = NULL;
             handle_->NumberRemainOperations++;
@@ -2366,30 +2368,7 @@ OFCondition DcmQueryRetrieveIndexDatabaseHandle::nextFindResponse (
 
     CharsetConsideringMatcher dbmatch(*handle_);
     MatchFound = mongoDBFindRecord(handle_, idxRec, qLevel, qLevel, &MatchFound, dbmatch);
-    /**
-    while (1) {
 
-        // Exit loop if read error (or end of file) 
-
-        if (DB_IdxGetNext (&(handle_->idxCounter), &idxRec) != EC_Normal)
-            break ;
-
-        // If Response already found
-
-        if (DB_UIDAlreadyFound (handle_, &idxRec))
-            continue ;
-
-        // Exit loop if error or matching OK 
-
-        dbmatch.setRecord(idxRec);
-        cond = hierarchicalCompare (handle_, &idxRec, qLevel, qLevel, &MatchFound, dbmatch) ;
-        if (cond != EC_Normal)
-            break ;
-        if (MatchFound)
-            break ;
-
-    }
-    **/
 
     /**** If an error occurred in Matching function
     ****    return status is pending
@@ -2600,9 +2579,7 @@ OFCondition DcmQueryRetrieveIndexDatabaseHandle::startMoveRequest(
         DcmDataset      *moveRequestIdentifiers,
         DcmQueryRetrieveDatabaseStatus  *status)
 {
-
     ReadMongoConfig();
-
     DB_SmallDcmElmt     elem ;
     DB_ElementList      *plist = NULL;
     DB_ElementList      *last = NULL;
@@ -2736,6 +2713,7 @@ OFCondition DcmQueryRetrieveIndexDatabaseHandle::startMoveRequest(
         /* The Query/Retrieve Level is missing */
         status->setStatus(STATUS_MOVE_Error_DataSetDoesNotMatchSOPClass);
         DCMQRDB_WARN("DB_startMoveRequest(): missing Query/Retrieve Level");
+        ConsoleLog("Request is missing Query/Retrieve Level", "E");
         std::cout << "Error:" << "DB_startMoveRequest(): missing Query/Retrieve Level" << std::endl;
         handle_->idxCounter = -1 ;
         DB_FreeElementList (handle_->findRequestList) ;
@@ -2792,40 +2770,6 @@ OFCondition DcmQueryRetrieveIndexDatabaseHandle::startMoveRequest(
 
     mongoDBFindRecordsForMove(handle_, plist, pidxlist, lastidxlist, status);
 
-    /*
-    DB_IdxInitLoop(&(handle_->idxCounter));
-    while (1) {
-
-        // Exit loop if read error (or end of file)
-        
-
-        if (DB_IdxGetNext (&(handle_->idxCounter), &idxRec) != EC_Normal)
-            break ;
-
-        // If matching found
-        
-
-        dbmatch.setRecord(idxRec);
-        cond = hierarchicalCompare (handle_, &idxRec, qLevel, qLevel, &MatchFound, dbmatch) ;
-        if (MatchFound) {
-            pidxlist = (DB_CounterList *) malloc (sizeof( DB_CounterList ) ) ;
-            if (pidxlist == NULL) {
-                status->setStatus(STATUS_FIND_Refused_OutOfResources);
-                return (QR_EC_IndexDatabaseError) ;
-            }
-
-            pidxlist->next = NULL ;
-            pidxlist->idxCounter = handle_->idxCounter ;
-            handle_->NumberRemainOperations++ ;
-            if ( handle_->moveCounterList == NULL )
-                handle_->moveCounterList = lastidxlist = pidxlist ;
-            else {
-                lastidxlist->next = pidxlist ;
-                lastidxlist = pidxlist ;
-            }
-        }
-    }
-    */
     DB_FreeElementList (handle_->findRequestList) ;
     handle_->findRequestList = NULL ;
 
