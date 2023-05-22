@@ -108,6 +108,52 @@ static int NbFindAttr = ((sizeof (TbFindAttr)) / (sizeof (TbFindAttr [0])));
 
 /* ========================= static functions ========================= */
 
+std::string getCurrentTimeAsString()
+{
+    // 取得目前時間
+    std::time_t currentTime = std::time(nullptr);
+
+    // 轉換為目前時區
+    std::tm* localTime = std::localtime(&currentTime);
+
+    // 轉換成string
+    std::ostringstream oss;
+    oss << std::put_time(localTime, "[%Y/%m/%d %H:%M:%S]");
+    return oss.str();
+}
+
+/*
+* msg=訊息
+* msgType--> E=ERROR
+*            D=DEBUG
+*            W=WARN
+*           ""=INFO
+*/
+static void ConsoleLog(std::string msg, std::string msgType)
+{
+    if (strcmp(msgType.c_str(), "E") == 0)
+    {
+        std::cout << "[ERROR]";
+    }
+    else if (strcmp(msgType.c_str(), "D") == 0)
+    {
+        std::cout << "[DEBUG]";
+    }
+    else if (strcmp(msgType.c_str(), "W") == 0)
+    {
+        std::cout << "[WARN]";
+    }
+    else
+    {
+        std::cout << "[INFO]";
+    }
+
+    std::string currentTime = getCurrentTimeAsString();
+    std::cout << currentTime;
+    std::cout << " ";
+    std::cout << msg << std::endl;
+}
+
 #pragma region MongoDB
 
 /**
@@ -129,7 +175,7 @@ std::string getExecutablePath() {
     DWORD pathLength = GetModuleFileName(NULL, exePath, MAX_PATH);
 
     if (pathLength == 0) {
-        std::cout << "Failed to retrieve executable path." << std::endl;
+        ConsoleLog("Failed to retrieve executable path.", "E");
         exit(1);
     }
 
@@ -137,7 +183,7 @@ std::string getExecutablePath() {
     std::size_t lastSlashPos = exeDirectory.find_last_of("\\/");
 
     if (lastSlashPos == std::string::npos) {
-        std::cout << "Invalid executable path." << std::endl;
+        ConsoleLog("Invalid executable path.", "E");
         exit(1);
     }
 
@@ -154,7 +200,7 @@ std::string getExecutablePath() {
     ssize_t pathLength = readlink("/proc/self/exe", exePath, sizeof(exePath));
 
     if (pathLength == -1) {
-        std::cout << "Failed to retrieve executable path." << std::endl;
+        ConsoleLog("Failed to retrieve executable path.", "E");
         exit(1);
     }
 
@@ -162,7 +208,7 @@ std::string getExecutablePath() {
     std::size_t lastSlashPos = exeDirectory.find_last_of("\\/");
 
     if (lastSlashPos == std::string::npos) {
-        std::cout << "Invalid executable path." << std::endl;
+        ConsoleLog("Invalid executable path.", "E");
         exit(1);
     }
 
@@ -180,32 +226,35 @@ void ReadMongoConfig()
     std::string configFilePath = exeDirectory + "dcmqrscpMongoConfig.cfg";
 
     std::ifstream config_file(configFilePath);
-    std::cout << "config path=" << configFilePath << std::endl;
-    if (!config_file.is_open()) {
-        std::cout << "Failed to open mongo config file." << std::endl;
+    if (!config_file.is_open()) 
+    {
+        ConsoleLog("MongoDB Config File Path:" + configFilePath, "");
+        ConsoleLog("Failed to open mongo config file.", "E");
     }
 
     std::string line;
-    while (std::getline(config_file, line)) {
+    while (std::getline(config_file, line)) 
+    {
         size_t delimiter_pos = line.find('=');
-        if (delimiter_pos != std::string::npos) {
+        if (delimiter_pos != std::string::npos) 
+        {
             std::string key = line.substr(0, delimiter_pos);
             std::string value = line.substr(delimiter_pos + 1);
 
-            if (key == "conn_string") {
-                //strcpy(conn_string, value.c_str());
+            if (key == "conn_string")
+            {
                 conn_string = value;
             }
-            else if (key == "mongoDB_name") {
-                //strcpy(mongoDB_name, value.c_str());
+            else if (key == "mongoDB_name") 
+            {
                 mongoDB_name = value;
             }
-            else if (key == "collection_name") {
-                //strcpy(collection_name, value.c_str());
+            else if (key == "collection_name") 
+            {
                 collection_name = value;
             }
-            else if (key == "DICOM_STORE_ROOTPATH") {
-                //strcpy(DICOM_STORE_ROOTPATH, value.c_str());
+            else if (key == "DICOM_STORE_ROOTPATH") 
+            {
                 DICOM_STORE_ROOTPATH = value;
             }
         }
@@ -214,10 +263,10 @@ void ReadMongoConfig()
     config_file.close();
 
     // 印出讀取後的變數值
-    std::cout << "conn_string: " << conn_string << std::endl;
-    std::cout << "mongoDB_name: " << mongoDB_name << std::endl;
-    std::cout << "collection_name: " << collection_name << std::endl;
-    std::cout << "DICOM_STORE_ROOTPATH: " << DICOM_STORE_ROOTPATH << std::endl;
+    ConsoleLog("MongoDB conn_string:" + conn_string, "");
+    ConsoleLog("MongoDB mongoDB_name:" + mongoDB_name, "");
+    ConsoleLog("MongoDB collection_name:" + collection_name, "");
+    ConsoleLog("MongoDB DICOM_STORE_ROOTPATH:" + DICOM_STORE_ROOTPATH, "");
 }
 
 /*
@@ -624,8 +673,7 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
     DB_ElementList* plist;
     DB_LEVEL    XTagLevel = PATIENT_LEVEL; // DB_GetTagLevel() will set this correctly
     OFBool foundAnything = OFFalse;
-    ReadMongoConfig();
-    std::cout << "start mongodb find" << "" << std::endl;
+    ConsoleLog("Start MongoDB C-FIND", "");
 
     // MongoDB連接
     mongoc_client_t* mongoClient;
@@ -635,12 +683,8 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
     mongoc_init();
     uri = mongoc_uri_new_with_error(conn_string.c_str(), &mongoError);
     if (!uri) {
-        fprintf(stderr,
-            "failed to parse URI: %s\n"
-            "error message:       %s\n",
-            conn_string.c_str(),
-            mongoError.message);
-        std::cout << "mongodb uri error" << "" << std::endl;
+        ConsoleLog("failed to parse URI:" + conn_string, "E");
+        ConsoleLog("error message:" + std::string(mongoError.message), "E");
     }
 
     mongoClient = mongoc_client_new_from_uri(uri);
@@ -662,8 +706,9 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
                 queryValue = ReplaceString(queryValue, "*", ".*");
                 queryValue = ReplaceString(queryValue, "?", ".");
 
+                ConsoleLog("QueryKey[" + queryKey + "]", "");
+                ConsoleLog("QueryValue[" + queryValue + "]", "");
 
-                //std::cout << queryKey << "," << queryValue << std::endl;
                 if (strcmp(xtag.c_str(), "0020000D") == 0)
                 {
                     BSON_APPEND_UTF8(query, queryKey.c_str(), plist->elem.PValueField.ptr.p);
@@ -690,9 +735,10 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
         while (mongoc_cursor_next(cursor, &resultBson)) {
             str = bson_as_canonical_extended_json(resultBson, NULL);
             bson_free(str);
+
             // Convert Bson to IdxRecord.
             bson_to_idx_record(resultBson, idxRec);
-            //std::cout << "idxRec FILENAME=" << idxRec.filename << "\n";
+
             if (DB_UIDAlreadyFound(handle_, &idxRec))
             {
                 continue;
@@ -703,7 +749,7 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
                 break;
             }
         }
-        std::cout << "ending mongodb find" << "" << std::endl;
+        ConsoleLog("End MongoDB C-FIND", "");
 
         // 釋放記憶體
         bson_destroy(query);
@@ -712,7 +758,7 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
     }
     else
     {
-        std::cout << "mongodb client error" << "" << std::endl;
+        ConsoleLog("MongoDB Client Error", "E");
     }
 
     // 釋放記憶體
@@ -728,9 +774,9 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
 OFConditionConst mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_ElementList* plist, DB_CounterList* pidxlist, DB_CounterList* lastidxlist, DcmQueryRetrieveDatabaseStatus* status)
 {
     ReadMongoConfig();
+
     // Find and get Records from mongodb
     // MongoDB連接
-
     mongoc_client_t* mongoClient;
     mongoc_database_t* db;
     mongoc_uri_t* uri;
@@ -802,7 +848,6 @@ OFConditionConst mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_Elemen
             bson_to_idx_record(resultBson, *pidxlist->rec);
 
             pidxlist->next = NULL;
-            //pidxlist->idxCounter = handle_->idxCounter;
             handle_->NumberRemainOperations++;
             if (handle_->moveCounterList == NULL)
             {
@@ -1514,7 +1559,7 @@ void DcmQueryRetrieveIndexDatabaseHandle::makeResponseList (
 
     /*** For each element in Request identifier
     **/
-    std::cout << "add file to res:" << idxRec->filename << std::endl;
+    ConsoleLog("Adding file to response:" + std::string(idxRec->filename), "");
     for (pRequestList = phandle->findRequestList ; pRequestList ; pRequestList = pRequestList->next) {
 
         /*** Find Corresponding Tag in index record
@@ -1864,6 +1909,9 @@ OFCondition DcmQueryRetrieveIndexDatabaseHandle::startFindRequest(
                 DcmDataset      *findRequestIdentifiers,
                 DcmQueryRetrieveDatabaseStatus  *status)
 {
+
+    ReadMongoConfig();
+
     DB_SmallDcmElmt     elem ;
     DB_ElementList      *plist = NULL;
     DB_ElementList      *last = NULL;
@@ -2366,7 +2414,7 @@ OFCondition DcmQueryRetrieveIndexDatabaseHandle::nextFindResponse (
     ****    prepare Response List in handle
     ***/
 
-    std::cout << "nextMatchFound=" << MatchFound << "\n";
+    ConsoleLog("Next Match Found = " + std::to_string(MatchFound), "");
     if (MatchFound) {
         DB_UIDAddFound (handle_, &idxRec) ;
         makeResponseList (handle_, &idxRec) ;
@@ -2552,6 +2600,8 @@ OFCondition DcmQueryRetrieveIndexDatabaseHandle::startMoveRequest(
         DcmDataset      *moveRequestIdentifiers,
         DcmQueryRetrieveDatabaseStatus  *status)
 {
+
+    ReadMongoConfig();
 
     DB_SmallDcmElmt     elem ;
     DB_ElementList      *plist = NULL;
