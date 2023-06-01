@@ -103,6 +103,7 @@ enum DB_QUERY_CLASS
 #define TM_MAX_LENGTH   128     /* Time                  */
 #define UI_MAX_LENGTH   64      /* Unique Identifier     */
 #define UL_MAX_LENGTH   32      /* Unsigned Long         */
+#define UR_MAX_LENGTH   4096   /* UR             */
 #define US_MAX_LENGTH   16      /* Unsigned Short        */
 #define CS_LABEL_MAX_LENGTH 16  /* Code String - Presentation Label */
 #define DESCRIPTION_MAX_LENGTH 128  /* Not related to any particular DICOM attribute */
@@ -354,7 +355,13 @@ struct DCMTK_DCMQRDB_EXPORT ImagesofStudyArray
 #define RECORDIDX_IssuerOfPatientID              36
 #define RECORDIDX_SpecificCharacterSet           37
 
-#define NBPARAMETERS                             38
+#define RECORDIDX_FileMetaInformationVersion 38
+#define RECORDIDX_MediaStorageSOPClassUID 39
+#define RECORDIDX_MediaStorageSOPInstanceUID 40
+#define RECORDIDX_TransferSyntaxUID 41
+#define RECORDIDX_ImplementationClassUID 42
+
+#define NBPARAMETERS                             43
 
 /* ENSURE THAT DBVERSION IS INCREMENTED WHENEVER ONE OF THESE STRUCTS IS MODIFIED */
 
@@ -426,6 +433,12 @@ struct DCMTK_DCMQRDB_EXPORT IdxRecord
     // Specific Character Set, support for VM ~ 8 (depending on the
     // actual length of the used DTs)
     char    SpecificCharacterSet            [CS_MAX_LENGTH*8+1] ;
+
+    char FileMetaInformationVersion[UR_MAX_LENGTH + 1];
+    char MediaStorageSOPClassUID[UI_MAX_LENGTH + 1];
+    char MediaStorageSOPInstanceUID[UI_MAX_LENGTH + 1];
+    char TransferSyntaxUID[UI_MAX_LENGTH + 1];
+    char ImplementationClassUID[UI_MAX_LENGTH + 1];
 
 private:
     /* undefined */ IdxRecord& operator=(const IdxRecord& copy);

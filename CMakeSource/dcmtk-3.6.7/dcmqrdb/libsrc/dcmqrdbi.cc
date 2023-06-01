@@ -98,7 +98,14 @@ static const DB_FindAttr TbFindAttr [] = {
         DB_FindAttr( DCM_SeriesInstanceUID,                     SERIE_LEVEL,    UNIQUE_KEY   ),
         DB_FindAttr( DCM_Modality,                              SERIE_LEVEL,    OPTIONAL_KEY ),
         DB_FindAttr( DCM_InstanceNumber,                        IMAGE_LEVEL,    REQUIRED_KEY ),
-        DB_FindAttr( DCM_SOPInstanceUID,                        IMAGE_LEVEL,    UNIQUE_KEY   )
+        DB_FindAttr( DCM_SOPInstanceUID,                        IMAGE_LEVEL,    UNIQUE_KEY   ),
+
+        DB_FindAttr( DCM_FileMetaInformationVersion,            IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr( DCM_MediaStorageSOPClassUID,               IMAGE_LEVEL,    UNIQUE_KEY),
+        DB_FindAttr( DCM_MediaStorageSOPInstanceUID,               IMAGE_LEVEL,    UNIQUE_KEY),
+        DB_FindAttr( DCM_TransferSyntaxUID,               IMAGE_LEVEL,    UNIQUE_KEY),
+        DB_FindAttr( DCM_ImplementationClassUID,               IMAGE_LEVEL,    UNIQUE_KEY)
+
   };
 
 /**** The NbFindAttr variable contains the length of the TbFindAttr table
@@ -448,6 +455,24 @@ static void DB_IdxInitRecord(IdxRecord* idx, int linksOnly)
         idx->param[RECORDIDX_SpecificCharacterSet].XTag = DCM_SpecificCharacterSet;
         idx->param[RECORDIDX_SpecificCharacterSet].ValueLength = CS_MAX_LENGTH * 8;
         idx->SpecificCharacterSet[0] = '\0';
+
+        idx->param[RECORDIDX_FileMetaInformationVersion].XTag = DCM_FileMetaInformationVersion;
+        idx->param[RECORDIDX_FileMetaInformationVersion].ValueLength = UR_MAX_LENGTH;
+        idx->FileMetaInformationVersion[0] = '\0';
+        idx->param[RECORDIDX_MediaStorageSOPClassUID].XTag = DCM_MediaStorageSOPClassUID;
+        idx->param[RECORDIDX_MediaStorageSOPClassUID].ValueLength = UI_MAX_LENGTH;
+        idx->MediaStorageSOPClassUID[0] = '\0';
+        idx->param[RECORDIDX_MediaStorageSOPInstanceUID].XTag = DCM_MediaStorageSOPInstanceUID;
+        idx->param[RECORDIDX_MediaStorageSOPInstanceUID].ValueLength = UI_MAX_LENGTH;
+        idx->MediaStorageSOPInstanceUID[0] = '\0';
+        idx->param[RECORDIDX_TransferSyntaxUID].XTag = DCM_TransferSyntaxUID;
+        idx->param[RECORDIDX_TransferSyntaxUID].ValueLength = UI_MAX_LENGTH;
+        idx->TransferSyntaxUID[0] = '\0';
+        idx->param[RECORDIDX_ImplementationClassUID].XTag = DCM_ImplementationClassUID;
+        idx->param[RECORDIDX_ImplementationClassUID].ValueLength = UI_MAX_LENGTH;
+        idx->ImplementationClassUID[0] = '\0';
+
+
     }
     idx->param[RECORDIDX_PatientBirthDate].PValueField = (char*)idx->PatientBirthDate;
     idx->param[RECORDIDX_PatientSex].PValueField = (char*)idx->PatientSex;
@@ -487,6 +512,12 @@ static void DB_IdxInitRecord(IdxRecord* idx, int linksOnly)
     idx->param[RECORDIDX_PresentationLabel].PValueField = (char*)idx->PresentationLabel;
     idx->param[RECORDIDX_IssuerOfPatientID].PValueField = (char*)idx->IssuerOfPatientID;
     idx->param[RECORDIDX_SpecificCharacterSet].PValueField = (char*)idx->SpecificCharacterSet;
+
+    idx->param[RECORDIDX_FileMetaInformationVersion].PValueField = (char*)idx->FileMetaInformationVersion;
+    idx->param[RECORDIDX_MediaStorageSOPClassUID].PValueField = (char*)idx->MediaStorageSOPClassUID;
+    idx->param[RECORDIDX_MediaStorageSOPInstanceUID].PValueField = (char*)idx->MediaStorageSOPInstanceUID;
+    idx->param[RECORDIDX_TransferSyntaxUID].PValueField = (char*)idx->TransferSyntaxUID;
+    idx->param[RECORDIDX_ImplementationClassUID].PValueField = (char*)idx->ImplementationClassUID;
 }
 
 /************
@@ -541,6 +572,10 @@ void GetParamInBson(const bson_t* i_bson, bson_iter_t& iter, std::string tag, ch
                 if (strcmp(bson_iter_key(&param_iter), "vr") == 0)
                 {
                     vrType = bson_iter_utf8(&param_iter, 0);
+                }
+                if (strcmp(bson_iter_key(&param_iter), "BulkDataURI") == 0)
+                {
+                    strcpy(&dest, bson_iter_utf8(&param_iter, 0));
                 }
                 if (strcmp(bson_iter_key(&param_iter), "Value") == 0)
                 {
@@ -654,6 +689,13 @@ IdxRecord* bson_to_idx_record(const bson_t* i_bson, IdxRecord& theRec)
             GetParamInBson(i_bson, iter, "00100021", *theRec.IssuerOfPatientID); //(strcmp(bson_iter_key(&iter), "IssuerOfPatientID") == 0) ? strcpy(theRec.IssuerOfPatientID, bson_iter_utf8(&iter, 0)) : "";
             //GetParamInBson(i_bson, iter, "00100040", *theRec.InstanceDescription); //(strcmp(bson_iter_key(&iter), "InstanceDescription") == 0) ? strcpy(theRec.InstanceDescription, bson_iter_utf8(&iter, 0)) : "";
             GetParamInBson(i_bson, iter, "00080005", *theRec.SpecificCharacterSet); //(strcmp(bson_iter_key(&iter), "SpecificCharacterSet") == 0) ? strcpy(theRec.SpecificCharacterSet, bson_iter_utf8(&iter, 0)) : "";
+
+
+            GetParamInBson(i_bson, iter, "00020001", *theRec.FileMetaInformationVersion);
+            GetParamInBson(i_bson, iter, "00020002", *theRec.MediaStorageSOPClassUID);
+            GetParamInBson(i_bson, iter, "00020003", *theRec.MediaStorageSOPInstanceUID);
+            GetParamInBson(i_bson, iter, "00020010", *theRec.TransferSyntaxUID);
+            GetParamInBson(i_bson, iter, "00020012", *theRec.ImplementationClassUID);
 
             //printf("Found a field named: %s\nvalue:%s\n", bson_iter_key(&iter), bson_iter_utf8(&iter, 0));
         }
@@ -2229,6 +2271,9 @@ OFCondition DcmQueryRetrieveIndexDatabaseHandle::nextFindResponse (
                 strlen(plist->elem.PValueField) > 0) {
                 OFCondition ec = dce->putString(plist->elem.PValueField);
                 if (ec != EC_Normal) {
+                    std::cout << "error code>>" << ec.text() << std::endl;
+                    std::cout << "tag>>" << plist->elem.XTag.key[0] << "," << plist->elem.XTag.key[1] << std::endl;
+                    std::cout << "val>>" << plist->elem.PValueField << std::endl;
                     DCMQRDB_WARN("dbfind: DB_nextFindResponse: cannot put()");
                     status->setStatus(STATUS_FIND_Failed_UnableToProcess);
                     return QR_EC_IndexDatabaseError;
