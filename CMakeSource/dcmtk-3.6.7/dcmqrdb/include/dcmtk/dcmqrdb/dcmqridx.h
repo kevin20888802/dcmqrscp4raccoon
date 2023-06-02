@@ -360,8 +360,66 @@ struct DCMTK_DCMQRDB_EXPORT ImagesofStudyArray
 #define RECORDIDX_MediaStorageSOPInstanceUID 40
 #define RECORDIDX_TransferSyntaxUID 41
 #define RECORDIDX_ImplementationClassUID 42
+#define RECORDIDX_ImplementationVersionName 43
+#define RECORDIDX_DirectoryRecordType 44
+#define RECORDIDX_ImageType 45
+#define RECORDIDX_AcquisitionDate 46
+#define RECORDIDX_ContentDate 47
+#define RECORDIDX_AcquisitionTime 48
+#define RECORDIDX_ContentTime 49
+#define RECORDIDX_Manufacturer 50
+#define RECORDIDX_ManufacturerModelName 51
+#define RECORDIDX_PatientIdentityRemoved 52
+#define RECORDIDX_DeidentificationMethod 53
+#define RECORDIDX_ContrastBolusAgent 54
+#define RECORDIDX_BodyPartExamined 55
+#define RECORDIDX_ScanOptions 56
+#define RECORDIDX_KVP 57
+#define RECORDIDX_DataCollectionDiameter 58
+#define RECORDIDX_SoftwareVersions 59
+#define RECORDIDX_ReconstructionDiameter 60
+#define RECORDIDX_GantryDetectorTilt 61
+#define RECORDIDX_TableHeight 62
+#define RECORDIDX_RotationDirection 63
+#define RECORDIDX_ExposureTime 64
+#define RECORDIDX_XRayTubeCurrent 65
+#define RECORDIDX_FilterType 66
+#define RECORDIDX_GeneratorPower 67
+#define RECORDIDX_FocalSpots 68
+#define RECORDIDX_ConvolutionKernel 69
+#define RECORDIDX_PatientPosition 70
+#define RECORDIDX_ExposureModulationType 71
+#define RECORDIDX_EstimatedDoseSaving 72
+#define RECORDIDX_CTDIvol 73
+#define RECORDIDX_AcquisitionNumber 74
+#define RECORDIDX_InstanceNumber 75
+#define RECORDIDX_PatientOrientation 76
+#define RECORDIDX_ImagePositionPatient 77
+#define RECORDIDX_ImageOrientationPatient 78
+#define RECORDIDX_FrameOfReferenceUID 79
+#define RECORDIDX_PositionReferenceIndicator 80
+#define RECORDIDX_SliceLocation 81
+#define RECORDIDX_SamplesPerPixel 82
+#define RECORDIDX_PhotometricInterpretation 83
+#define RECORDIDX_PlanarConfiguration 84
+#define RECORDIDX_NumberOfFrames 85
+#define RECORDIDX_Rows 86
+#define RECORDIDX_Columns 87
+#define RECORDIDX_PixelSpacing 88
+#define RECORDIDX_PixelAspectRatio 89
+#define RECORDIDX_BitsAllocated 90
+#define RECORDIDX_BitsStored 91
+#define RECORDIDX_HighBit 92
+#define RECORDIDX_PixelRepresentation 93
+#define RECORDIDX_WindowCenter 94
+#define RECORDIDX_WindowWidth 95
+#define RECORDIDX_RescaleIntercept 96
+#define RECORDIDX_RescaleSlope 97
+#define RECORDIDX_StorageMediaFileSetID 98
+#define RECORDIDX_StorageMediaFileSetUID 99
+#define RECORDIDX_PixelData 100
 
-#define NBPARAMETERS                             43
+#define NBPARAMETERS                             101
 
 /* ENSURE THAT DBVERSION IS INCREMENTED WHENEVER ONE OF THESE STRUCTS IS MODIFIED */
 
@@ -439,6 +497,64 @@ struct DCMTK_DCMQRDB_EXPORT IdxRecord
     char MediaStorageSOPInstanceUID[UI_MAX_LENGTH + 1];
     char TransferSyntaxUID[UI_MAX_LENGTH + 1];
     char ImplementationClassUID[UI_MAX_LENGTH + 1];
+    char ImplementationVersionName[SH_MAX_LENGTH + 1];
+    char DirectoryRecordType[CS_MAX_LENGTH + 1];
+    char ImageType[CS_MAX_LENGTH + 1];
+    char AcquisitionDate[DA_MAX_LENGTH + 1];
+    char ContentDate[DA_MAX_LENGTH + 1];
+    char AcquisitionTime[TM_MAX_LENGTH + 1];
+    char ContentTime[TM_MAX_LENGTH + 1];
+    char Manufacturer[LO_MAX_LENGTH + 1];
+    char ManufacturerModelName[LO_MAX_LENGTH + 1];
+    char PatientIdentityRemoved[CS_MAX_LENGTH + 1];
+    char DeidentificationMethod[LO_MAX_LENGTH + 1];
+    char ContrastBolusAgent[LO_MAX_LENGTH + 1];
+    char BodyPartExamined[CS_MAX_LENGTH + 1];
+    char ScanOptions[CS_MAX_LENGTH + 1];
+    char KVP[DS_MAX_LENGTH + 1];
+    char DataCollectionDiameter[DS_MAX_LENGTH + 1];
+    char SoftwareVersions[LO_MAX_LENGTH + 1];
+    char ReconstructionDiameter[DS_MAX_LENGTH + 1];
+    char GantryDetectorTilt[DS_MAX_LENGTH + 1];
+    char TableHeight[DS_MAX_LENGTH + 1];
+    char RotationDirection[CS_MAX_LENGTH + 1];
+    char ExposureTime[IS_MAX_LENGTH + 1];
+    char XRayTubeCurrent[IS_MAX_LENGTH + 1];
+    char FilterType[SH_MAX_LENGTH + 1];
+    char GeneratorPower[IS_MAX_LENGTH + 1];
+    char FocalSpots[DS_MAX_LENGTH + 1];
+    char ConvolutionKernel[SH_MAX_LENGTH + 1];
+    char PatientPosition[SH_MAX_LENGTH + 1];
+    char ExposureModulationType[CS_MAX_LENGTH + 1];
+    char EstimatedDoseSaving[FD_MAX_LENGTH + 1];
+    char CTDIvol[FD_MAX_LENGTH + 1];
+    char AcquisitionNumber[IS_MAX_LENGTH + 1];
+    char InstanceNumber[IS_MAX_LENGTH + 1];
+    char PatientOrientation[IS_MAX_LENGTH + 1];
+    char ImagePositionPatient[DS_MAX_LENGTH + 1];
+    char ImageOrientationPatient[DS_MAX_LENGTH + 1];
+    char FrameOfReferenceUID[UI_MAX_LENGTH + 1];
+    char PositionReferenceIndicator[LO_MAX_LENGTH + 1];
+    char SliceLocation[DS_MAX_LENGTH + 1];
+    char SamplesPerPixel[US_MAX_LENGTH + 1];
+    char PhotometricInterpretation[CS_MAX_LENGTH + 1];
+    char PlanarConfiguration[US_MAX_LENGTH + 1];
+    char NumberOfFrames[IS_MAX_LENGTH + 1];
+    char Rows[US_MAX_LENGTH + 1];
+    char Columns[US_MAX_LENGTH + 1];
+    char PixelSpacing[DS_MAX_LENGTH + 1];
+    char PixelAspectRatio[IS_MAX_LENGTH + 1];
+    char BitsAllocated[US_MAX_LENGTH + 1];
+    char BitsStored[US_MAX_LENGTH + 1];
+    char HighBit[US_MAX_LENGTH + 1];
+    char PixelRepresentation[US_MAX_LENGTH + 1];
+    char WindowCenter[DS_MAX_LENGTH + 1];
+    char WindowWidth[DS_MAX_LENGTH + 1];
+    char RescaleIntercept[DS_MAX_LENGTH + 1];
+    char RescaleSlope[DS_MAX_LENGTH + 1];
+    char StorageMediaFileSetID[SH_MAX_LENGTH + 1];
+    char StorageMediaFileSetUID[UI_MAX_LENGTH + 1];
+    char PixelData[UR_MAX_LENGTH + 1];
 
 private:
     /* undefined */ IdxRecord& operator=(const IdxRecord& copy);

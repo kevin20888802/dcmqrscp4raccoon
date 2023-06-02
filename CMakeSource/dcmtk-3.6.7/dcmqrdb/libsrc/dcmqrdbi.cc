@@ -100,11 +100,68 @@ static const DB_FindAttr TbFindAttr [] = {
         DB_FindAttr( DCM_InstanceNumber,                        IMAGE_LEVEL,    REQUIRED_KEY ),
         DB_FindAttr( DCM_SOPInstanceUID,                        IMAGE_LEVEL,    UNIQUE_KEY   ),
 
-        DB_FindAttr( DCM_FileMetaInformationVersion,            IMAGE_LEVEL,    OPTIONAL_KEY),
-        DB_FindAttr( DCM_MediaStorageSOPClassUID,               IMAGE_LEVEL,    UNIQUE_KEY),
-        DB_FindAttr( DCM_MediaStorageSOPInstanceUID,               IMAGE_LEVEL,    UNIQUE_KEY),
-        DB_FindAttr( DCM_TransferSyntaxUID,               IMAGE_LEVEL,    UNIQUE_KEY),
-        DB_FindAttr( DCM_ImplementationClassUID,               IMAGE_LEVEL,    UNIQUE_KEY)
+        DB_FindAttr(DCM_MediaStorageSOPClassUID,           IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_MediaStorageSOPInstanceUID,       IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_TransferSyntaxUID,                IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ImplementationClassUID,           IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ImplementationVersionName,        IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_DirectoryRecordType,              IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ImageType,                        IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_AcquisitionDate,                  IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ContentDate,                      IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_AcquisitionTime,                  IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ContentTime,                      IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_Manufacturer,                     IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ManufacturerModelName,            IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_PatientIdentityRemoved,           IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_DeidentificationMethod,           IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ContrastBolusAgent,               IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_BodyPartExamined,                 IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ScanOptions,                      IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_KVP,                              IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_DataCollectionDiameter,           IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_SoftwareVersions,                 IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ReconstructionDiameter,           IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_GantryDetectorTilt,               IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_TableHeight,                      IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_RotationDirection,                IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ExposureTime,                     IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_XRayTubeCurrent,                  IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_FilterType,                       IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_GeneratorPower,                   IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_FocalSpots,                       IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ConvolutionKernel,                IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_PatientPosition,                  IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ExposureModulationType,           IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_RETIRED_EstimatedDoseSaving,              IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_CTDIvol,                          IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_AcquisitionNumber,                IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_InstanceNumber,                   IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_PatientOrientation,               IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ImagePositionPatient,             IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_ImageOrientationPatient,          IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_FrameOfReferenceUID,              IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_PositionReferenceIndicator,       IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_SliceLocation,                    IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_SamplesPerPixel,                  IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_PhotometricInterpretation,        IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_PlanarConfiguration,              IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_NumberOfFrames,                   IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_Rows,                             IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_Columns,                          IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_PixelSpacing,                     IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_PixelAspectRatio,                 IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_BitsAllocated,                    IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_BitsStored,                       IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_HighBit,                          IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_PixelRepresentation,              IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_WindowCenter,                     IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_WindowWidth,                      IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_RescaleIntercept,                 IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_RescaleSlope,                     IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_StorageMediaFileSetID,            IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_StorageMediaFileSetUID,           IMAGE_LEVEL,    OPTIONAL_KEY),
+        DB_FindAttr(DCM_PixelData,                        IMAGE_LEVEL,    OPTIONAL_KEY)
 
   };
 
@@ -471,7 +528,183 @@ static void DB_IdxInitRecord(IdxRecord* idx, int linksOnly)
         idx->param[RECORDIDX_ImplementationClassUID].XTag = DCM_ImplementationClassUID;
         idx->param[RECORDIDX_ImplementationClassUID].ValueLength = UI_MAX_LENGTH;
         idx->ImplementationClassUID[0] = '\0';
-
+        idx->param[RECORDIDX_ImplementationVersionName].XTag = DCM_ImplementationVersionName;
+        idx->param[RECORDIDX_ImplementationVersionName].ValueLength = SH_MAX_LENGTH;
+        idx->ImplementationVersionName[0] = '\0';
+        idx->param[RECORDIDX_DirectoryRecordType].XTag = DCM_DirectoryRecordType;
+        idx->param[RECORDIDX_DirectoryRecordType].ValueLength = CS_MAX_LENGTH;
+        idx->DirectoryRecordType[0] = '\0';
+        idx->param[RECORDIDX_ImageType].XTag = DCM_ImageType;
+        idx->param[RECORDIDX_ImageType].ValueLength = CS_MAX_LENGTH;
+        idx->ImageType[0] = '\0';
+        idx->param[RECORDIDX_AcquisitionDate].XTag = DCM_AcquisitionDate;
+        idx->param[RECORDIDX_AcquisitionDate].ValueLength = DA_MAX_LENGTH;
+        idx->AcquisitionDate[0] = '\0';
+        idx->param[RECORDIDX_ContentDate].XTag = DCM_ContentDate;
+        idx->param[RECORDIDX_ContentDate].ValueLength = DA_MAX_LENGTH;
+        idx->ContentDate[0] = '\0';
+        idx->param[RECORDIDX_AcquisitionTime].XTag = DCM_AcquisitionTime;
+        idx->param[RECORDIDX_AcquisitionTime].ValueLength = TM_MAX_LENGTH;
+        idx->AcquisitionTime[0] = '\0';
+        idx->param[RECORDIDX_ContentTime].XTag = DCM_ContentTime;
+        idx->param[RECORDIDX_ContentTime].ValueLength = TM_MAX_LENGTH;
+        idx->ContentTime[0] = '\0';
+        idx->param[RECORDIDX_Manufacturer].XTag = DCM_Manufacturer;
+        idx->param[RECORDIDX_Manufacturer].ValueLength = LO_MAX_LENGTH;
+        idx->Manufacturer[0] = '\0';
+        idx->param[RECORDIDX_ManufacturerModelName].XTag = DCM_ManufacturerModelName;
+        idx->param[RECORDIDX_ManufacturerModelName].ValueLength = LO_MAX_LENGTH;
+        idx->ManufacturerModelName[0] = '\0';
+        idx->param[RECORDIDX_PatientIdentityRemoved].XTag = DCM_PatientIdentityRemoved;
+        idx->param[RECORDIDX_PatientIdentityRemoved].ValueLength = CS_MAX_LENGTH;
+        idx->PatientIdentityRemoved[0] = '\0';
+        idx->param[RECORDIDX_DeidentificationMethod].XTag = DCM_DeidentificationMethod;
+        idx->param[RECORDIDX_DeidentificationMethod].ValueLength = LO_MAX_LENGTH;
+        idx->DeidentificationMethod[0] = '\0';
+        idx->param[RECORDIDX_ContrastBolusAgent].XTag = DCM_ContrastBolusAgent;
+        idx->param[RECORDIDX_ContrastBolusAgent].ValueLength = LO_MAX_LENGTH;
+        idx->ContrastBolusAgent[0] = '\0';
+        idx->param[RECORDIDX_BodyPartExamined].XTag = DCM_BodyPartExamined;
+        idx->param[RECORDIDX_BodyPartExamined].ValueLength = CS_MAX_LENGTH;
+        idx->BodyPartExamined[0] = '\0';
+        idx->param[RECORDIDX_ScanOptions].XTag = DCM_ScanOptions;
+        idx->param[RECORDIDX_ScanOptions].ValueLength = CS_MAX_LENGTH;
+        idx->ScanOptions[0] = '\0';
+        idx->param[RECORDIDX_KVP].XTag = DCM_KVP;
+        idx->param[RECORDIDX_KVP].ValueLength = DS_MAX_LENGTH;
+        idx->KVP[0] = '\0';
+        idx->param[RECORDIDX_DataCollectionDiameter].XTag = DCM_DataCollectionDiameter;
+        idx->param[RECORDIDX_DataCollectionDiameter].ValueLength = DS_MAX_LENGTH;
+        idx->DataCollectionDiameter[0] = '\0';
+        idx->param[RECORDIDX_SoftwareVersions].XTag = DCM_SoftwareVersions;
+        idx->param[RECORDIDX_SoftwareVersions].ValueLength = LO_MAX_LENGTH;
+        idx->SoftwareVersions[0] = '\0';
+        idx->param[RECORDIDX_ReconstructionDiameter].XTag = DCM_ReconstructionDiameter;
+        idx->param[RECORDIDX_ReconstructionDiameter].ValueLength = DS_MAX_LENGTH;
+        idx->ReconstructionDiameter[0] = '\0';
+        idx->param[RECORDIDX_GantryDetectorTilt].XTag = DCM_GantryDetectorTilt;
+        idx->param[RECORDIDX_GantryDetectorTilt].ValueLength = DS_MAX_LENGTH;
+        idx->GantryDetectorTilt[0] = '\0';
+        idx->param[RECORDIDX_TableHeight].XTag = DCM_TableHeight;
+        idx->param[RECORDIDX_TableHeight].ValueLength = DS_MAX_LENGTH;
+        idx->TableHeight[0] = '\0';
+        idx->param[RECORDIDX_RotationDirection].XTag = DCM_RotationDirection;
+        idx->param[RECORDIDX_RotationDirection].ValueLength = CS_MAX_LENGTH;
+        idx->RotationDirection[0] = '\0';
+        idx->param[RECORDIDX_ExposureTime].XTag = DCM_ExposureTime;
+        idx->param[RECORDIDX_ExposureTime].ValueLength = IS_MAX_LENGTH;
+        idx->ExposureTime[0] = '\0';
+        idx->param[RECORDIDX_XRayTubeCurrent].XTag = DCM_XRayTubeCurrent;
+        idx->param[RECORDIDX_XRayTubeCurrent].ValueLength = IS_MAX_LENGTH;
+        idx->XRayTubeCurrent[0] = '\0';
+        idx->param[RECORDIDX_FilterType].XTag = DCM_FilterType;
+        idx->param[RECORDIDX_FilterType].ValueLength = SH_MAX_LENGTH;
+        idx->FilterType[0] = '\0';
+        idx->param[RECORDIDX_GeneratorPower].XTag = DCM_GeneratorPower;
+        idx->param[RECORDIDX_GeneratorPower].ValueLength = IS_MAX_LENGTH;
+        idx->GeneratorPower[0] = '\0';
+        idx->param[RECORDIDX_FocalSpots].XTag = DCM_FocalSpots;
+        idx->param[RECORDIDX_FocalSpots].ValueLength = DS_MAX_LENGTH;
+        idx->FocalSpots[0] = '\0';
+        idx->param[RECORDIDX_ConvolutionKernel].XTag = DCM_ConvolutionKernel;
+        idx->param[RECORDIDX_ConvolutionKernel].ValueLength = SH_MAX_LENGTH;
+        idx->ConvolutionKernel[0] = '\0';
+        idx->param[RECORDIDX_PatientPosition].XTag = DCM_PatientPosition;
+        idx->param[RECORDIDX_PatientPosition].ValueLength = SH_MAX_LENGTH;
+        idx->PatientPosition[0] = '\0';
+        idx->param[RECORDIDX_PatientPosition].XTag = DCM_PatientPosition;
+        idx->param[RECORDIDX_PatientPosition].ValueLength = CS_MAX_LENGTH;
+        idx->PatientPosition[0] = '\0';
+        idx->param[RECORDIDX_ExposureModulationType].XTag = DCM_ExposureModulationType;
+        idx->param[RECORDIDX_ExposureModulationType].ValueLength = CS_MAX_LENGTH;
+        idx->ExposureModulationType[0] = '\0';
+        idx->param[RECORDIDX_EstimatedDoseSaving].XTag = DCM_RETIRED_EstimatedDoseSaving;
+        idx->param[RECORDIDX_EstimatedDoseSaving].ValueLength = FD_MAX_LENGTH;
+        idx->EstimatedDoseSaving[0] = '\0';
+        idx->param[RECORDIDX_CTDIvol].XTag = DCM_CTDIvol;
+        idx->param[RECORDIDX_CTDIvol].ValueLength = FD_MAX_LENGTH;
+        idx->CTDIvol[0] = '\0';
+        idx->param[RECORDIDX_AcquisitionNumber].XTag = DCM_AcquisitionNumber;
+        idx->param[RECORDIDX_AcquisitionNumber].ValueLength = IS_MAX_LENGTH;
+        idx->AcquisitionNumber[0] = '\0';
+        idx->param[RECORDIDX_InstanceNumber].XTag = DCM_InstanceNumber;
+        idx->param[RECORDIDX_InstanceNumber].ValueLength = IS_MAX_LENGTH;
+        idx->InstanceNumber[0] = '\0';
+        idx->param[RECORDIDX_PatientOrientation].XTag = DCM_PatientOrientation;
+        idx->param[RECORDIDX_PatientOrientation].ValueLength = IS_MAX_LENGTH;
+        idx->PatientOrientation[0] = '\0';
+        idx->param[RECORDIDX_ImagePositionPatient].XTag = DCM_ImagePositionPatient;
+        idx->param[RECORDIDX_ImagePositionPatient].ValueLength = DS_MAX_LENGTH;
+        idx->ImagePositionPatient[0] = '\0';
+        idx->param[RECORDIDX_ImageOrientationPatient].XTag = DCM_ImageOrientationPatient;
+        idx->param[RECORDIDX_ImageOrientationPatient].ValueLength = DS_MAX_LENGTH;
+        idx->ImageOrientationPatient[0] = '\0';
+        idx->param[RECORDIDX_FrameOfReferenceUID].XTag = DCM_FrameOfReferenceUID;
+        idx->param[RECORDIDX_FrameOfReferenceUID].ValueLength = UI_MAX_LENGTH;
+        idx->FrameOfReferenceUID[0] = '\0';
+        idx->param[RECORDIDX_PositionReferenceIndicator].XTag = DCM_PositionReferenceIndicator;
+        idx->param[RECORDIDX_PositionReferenceIndicator].ValueLength = LO_MAX_LENGTH;
+        idx->PositionReferenceIndicator[0] = '\0';
+        idx->param[RECORDIDX_SliceLocation].XTag = DCM_SliceLocation;
+        idx->param[RECORDIDX_SliceLocation].ValueLength = DS_MAX_LENGTH;
+        idx->SliceLocation[0] = '\0';
+        idx->param[RECORDIDX_SamplesPerPixel].XTag = DCM_SamplesPerPixel;
+        idx->param[RECORDIDX_SamplesPerPixel].ValueLength = US_MAX_LENGTH;
+        idx->SamplesPerPixel[0] = '\0';
+        idx->param[RECORDIDX_PhotometricInterpretation].XTag = DCM_PhotometricInterpretation;
+        idx->param[RECORDIDX_PhotometricInterpretation].ValueLength = CS_MAX_LENGTH;
+        idx->PhotometricInterpretation[0] = '\0';
+        idx->param[RECORDIDX_PlanarConfiguration].XTag = DCM_PlanarConfiguration;
+        idx->param[RECORDIDX_PlanarConfiguration].ValueLength = US_MAX_LENGTH;
+        idx->PlanarConfiguration[0] = '\0';
+        idx->param[RECORDIDX_NumberOfFrames].XTag = DCM_NumberOfFrames;
+        idx->param[RECORDIDX_NumberOfFrames].ValueLength = IS_MAX_LENGTH;
+        idx->NumberOfFrames[0] = '\0';
+        idx->param[RECORDIDX_Rows].XTag = DCM_Rows;
+        idx->param[RECORDIDX_Rows].ValueLength = US_MAX_LENGTH;
+        idx->Rows[0] = '\0';
+        idx->param[RECORDIDX_Columns].XTag = DCM_Columns;
+        idx->param[RECORDIDX_Columns].ValueLength = US_MAX_LENGTH;
+        idx->Columns[0] = '\0';
+        idx->param[RECORDIDX_PixelSpacing].XTag = DCM_PixelSpacing;
+        idx->param[RECORDIDX_PixelSpacing].ValueLength = DS_MAX_LENGTH;
+        idx->PixelSpacing[0] = '\0';
+        idx->param[RECORDIDX_PixelAspectRatio].XTag = DCM_PixelAspectRatio;
+        idx->param[RECORDIDX_PixelAspectRatio].ValueLength = IS_MAX_LENGTH;
+        idx->PixelAspectRatio[0] = '\0';
+        idx->param[RECORDIDX_BitsAllocated].XTag = DCM_BitsAllocated;
+        idx->param[RECORDIDX_BitsAllocated].ValueLength = US_MAX_LENGTH;
+        idx->BitsAllocated[0] = '\0';
+        idx->param[RECORDIDX_BitsStored].XTag = DCM_BitsStored;
+        idx->param[RECORDIDX_BitsStored].ValueLength = US_MAX_LENGTH;
+        idx->BitsStored[0] = '\0';
+        idx->param[RECORDIDX_HighBit].XTag = DCM_HighBit;
+        idx->param[RECORDIDX_HighBit].ValueLength = US_MAX_LENGTH;
+        idx->HighBit[0] = '\0';
+        idx->param[RECORDIDX_PixelRepresentation].XTag = DCM_PixelRepresentation;
+        idx->param[RECORDIDX_PixelRepresentation].ValueLength = US_MAX_LENGTH;
+        idx->PixelRepresentation[0] = '\0';
+        idx->param[RECORDIDX_WindowCenter].XTag = DCM_WindowCenter;
+        idx->param[RECORDIDX_WindowCenter].ValueLength = DS_MAX_LENGTH;
+        idx->WindowCenter[0] = '\0';
+        idx->param[RECORDIDX_WindowWidth].XTag = DCM_WindowWidth;
+        idx->param[RECORDIDX_WindowWidth].ValueLength = DS_MAX_LENGTH;
+        idx->WindowWidth[0] = '\0';
+        idx->param[RECORDIDX_RescaleIntercept].XTag = DCM_RescaleIntercept;
+        idx->param[RECORDIDX_RescaleIntercept].ValueLength = DS_MAX_LENGTH;
+        idx->RescaleIntercept[0] = '\0';
+        idx->param[RECORDIDX_RescaleSlope].XTag = DCM_RescaleSlope;
+        idx->param[RECORDIDX_RescaleSlope].ValueLength = DS_MAX_LENGTH;
+        idx->RescaleSlope[0] = '\0';
+        idx->param[RECORDIDX_StorageMediaFileSetID].XTag = DCM_StorageMediaFileSetID;
+        idx->param[RECORDIDX_StorageMediaFileSetID].ValueLength = SH_MAX_LENGTH;
+        idx->StorageMediaFileSetID[0] = '\0';
+        idx->param[RECORDIDX_StorageMediaFileSetUID].XTag = DCM_StorageMediaFileSetUID;
+        idx->param[RECORDIDX_StorageMediaFileSetUID].ValueLength = UI_MAX_LENGTH;
+        idx->StorageMediaFileSetUID[0] = '\0';
+        idx->param[RECORDIDX_PixelData].XTag = DCM_PixelData;
+        idx->param[RECORDIDX_PixelData].ValueLength = UR_MAX_LENGTH;
+        idx->PixelData[0] = '\0';
 
     }
     idx->param[RECORDIDX_PatientBirthDate].PValueField = (char*)idx->PatientBirthDate;
@@ -513,11 +746,68 @@ static void DB_IdxInitRecord(IdxRecord* idx, int linksOnly)
     idx->param[RECORDIDX_IssuerOfPatientID].PValueField = (char*)idx->IssuerOfPatientID;
     idx->param[RECORDIDX_SpecificCharacterSet].PValueField = (char*)idx->SpecificCharacterSet;
 
-    idx->param[RECORDIDX_FileMetaInformationVersion].PValueField = (char*)idx->FileMetaInformationVersion;
     idx->param[RECORDIDX_MediaStorageSOPClassUID].PValueField = (char*)idx->MediaStorageSOPClassUID;
     idx->param[RECORDIDX_MediaStorageSOPInstanceUID].PValueField = (char*)idx->MediaStorageSOPInstanceUID;
     idx->param[RECORDIDX_TransferSyntaxUID].PValueField = (char*)idx->TransferSyntaxUID;
     idx->param[RECORDIDX_ImplementationClassUID].PValueField = (char*)idx->ImplementationClassUID;
+    idx->param[RECORDIDX_ImplementationVersionName].PValueField = (char*)idx->ImplementationVersionName;
+    idx->param[RECORDIDX_DirectoryRecordType].PValueField = (char*)idx->DirectoryRecordType;
+    idx->param[RECORDIDX_ImageType].PValueField = (char*)idx->ImageType;
+    idx->param[RECORDIDX_AcquisitionDate].PValueField = (char*)idx->AcquisitionDate;
+    idx->param[RECORDIDX_ContentDate].PValueField = (char*)idx->ContentDate;
+    idx->param[RECORDIDX_AcquisitionTime].PValueField = (char*)idx->AcquisitionTime;
+    idx->param[RECORDIDX_ContentTime].PValueField = (char*)idx->ContentTime;
+    idx->param[RECORDIDX_Manufacturer].PValueField = (char*)idx->Manufacturer;
+    idx->param[RECORDIDX_ManufacturerModelName].PValueField = (char*)idx->ManufacturerModelName;
+    idx->param[RECORDIDX_PatientIdentityRemoved].PValueField = (char*)idx->PatientIdentityRemoved;
+    idx->param[RECORDIDX_DeidentificationMethod].PValueField = (char*)idx->DeidentificationMethod;
+    idx->param[RECORDIDX_ContrastBolusAgent].PValueField = (char*)idx->ContrastBolusAgent;
+    idx->param[RECORDIDX_BodyPartExamined].PValueField = (char*)idx->BodyPartExamined;
+    idx->param[RECORDIDX_ScanOptions].PValueField = (char*)idx->ScanOptions;
+    idx->param[RECORDIDX_KVP].PValueField = (char*)idx->KVP;
+    idx->param[RECORDIDX_DataCollectionDiameter].PValueField = (char*)idx->DataCollectionDiameter;
+    idx->param[RECORDIDX_SoftwareVersions].PValueField = (char*)idx->SoftwareVersions;
+    idx->param[RECORDIDX_ReconstructionDiameter].PValueField = (char*)idx->ReconstructionDiameter;
+    idx->param[RECORDIDX_GantryDetectorTilt].PValueField = (char*)idx->GantryDetectorTilt;
+    idx->param[RECORDIDX_TableHeight].PValueField = (char*)idx->TableHeight;
+    idx->param[RECORDIDX_RotationDirection].PValueField = (char*)idx->RotationDirection;
+    idx->param[RECORDIDX_ExposureTime].PValueField = (char*)idx->ExposureTime;
+    idx->param[RECORDIDX_XRayTubeCurrent].PValueField = (char*)idx->XRayTubeCurrent;
+    idx->param[RECORDIDX_FilterType].PValueField = (char*)idx->FilterType;
+    idx->param[RECORDIDX_GeneratorPower].PValueField = (char*)idx->GeneratorPower;
+    idx->param[RECORDIDX_FocalSpots].PValueField = (char*)idx->FocalSpots;
+    idx->param[RECORDIDX_ConvolutionKernel].PValueField = (char*)idx->ConvolutionKernel;
+    idx->param[RECORDIDX_PatientPosition].PValueField = (char*)idx->PatientPosition;
+    idx->param[RECORDIDX_ExposureModulationType].PValueField = (char*)idx->ExposureModulationType;
+    idx->param[RECORDIDX_EstimatedDoseSaving].PValueField = (char*)idx->EstimatedDoseSaving;
+    idx->param[RECORDIDX_CTDIvol].PValueField = (char*)idx->CTDIvol;
+    idx->param[RECORDIDX_AcquisitionNumber].PValueField = (char*)idx->AcquisitionNumber;
+    idx->param[RECORDIDX_InstanceNumber].PValueField = (char*)idx->InstanceNumber;
+    idx->param[RECORDIDX_PatientOrientation].PValueField = (char*)idx->PatientOrientation;
+    idx->param[RECORDIDX_ImagePositionPatient].PValueField = (char*)idx->ImagePositionPatient;
+    idx->param[RECORDIDX_ImageOrientationPatient].PValueField = (char*)idx->ImageOrientationPatient;
+    idx->param[RECORDIDX_FrameOfReferenceUID].PValueField = (char*)idx->FrameOfReferenceUID;
+    idx->param[RECORDIDX_PositionReferenceIndicator].PValueField = (char*)idx->PositionReferenceIndicator;
+    idx->param[RECORDIDX_SliceLocation].PValueField = (char*)idx->SliceLocation;
+    idx->param[RECORDIDX_SamplesPerPixel].PValueField = (char*)idx->SamplesPerPixel;
+    idx->param[RECORDIDX_PhotometricInterpretation].PValueField = (char*)idx->PhotometricInterpretation;
+    idx->param[RECORDIDX_PlanarConfiguration].PValueField = (char*)idx->PlanarConfiguration;
+    idx->param[RECORDIDX_NumberOfFrames].PValueField = (char*)idx->NumberOfFrames;
+    idx->param[RECORDIDX_Rows].PValueField = (char*)idx->Rows;
+    idx->param[RECORDIDX_Columns].PValueField = (char*)idx->Columns;
+    idx->param[RECORDIDX_PixelSpacing].PValueField = (char*)idx->PixelSpacing;
+    idx->param[RECORDIDX_PixelAspectRatio].PValueField = (char*)idx->PixelAspectRatio;
+    idx->param[RECORDIDX_BitsAllocated].PValueField = (char*)idx->BitsAllocated;
+    idx->param[RECORDIDX_BitsStored].PValueField = (char*)idx->BitsStored;
+    idx->param[RECORDIDX_HighBit].PValueField = (char*)idx->HighBit;
+    idx->param[RECORDIDX_PixelRepresentation].PValueField = (char*)idx->PixelRepresentation;
+    idx->param[RECORDIDX_WindowCenter].PValueField = (char*)idx->WindowCenter;
+    idx->param[RECORDIDX_WindowWidth].PValueField = (char*)idx->WindowWidth;
+    idx->param[RECORDIDX_RescaleIntercept].PValueField = (char*)idx->RescaleIntercept;
+    idx->param[RECORDIDX_RescaleSlope].PValueField = (char*)idx->RescaleSlope;
+    idx->param[RECORDIDX_StorageMediaFileSetID].PValueField = (char*)idx->StorageMediaFileSetID;
+    idx->param[RECORDIDX_StorageMediaFileSetUID].PValueField = (char*)idx->StorageMediaFileSetUID;
+    idx->param[RECORDIDX_PixelData].PValueField = (char*)idx->PixelData;
 }
 
 /************
@@ -609,6 +899,10 @@ void GetParamInBson(const bson_t* i_bson, bson_iter_t& iter, std::string tag, ch
                                 {
                                     strcpy(&dest, bson_iter_utf8(&array_iter, 0));
                                 }
+                                else if (BSON_ITER_HOLDS_INT(&array_iter))
+                                {
+                                    strcpy(&dest, std::to_string(bson_iter_int32(&array_iter)).c_str());
+                                }
                                 else if (BSON_ITER_HOLDS_DATE_TIME(&array_iter))
                                 {
                                     int64_t timestamp = bson_iter_date_time(&array_iter);
@@ -645,6 +939,7 @@ IdxRecord* bson_to_idx_record(const bson_t* i_bson, IdxRecord& theRec)
             if (strcmp(bson_iter_key(&iter), "instancePath") == 0)
             {
                 std::string filename = std::string(DICOM_STORE_ROOTPATH) + '/' + std::string(bson_iter_utf8(&iter, 0));
+                ConsoleLog("Filename:" + filename, "");
                 strcpy(theRec.filename, filename.c_str());
             }
             GetParamInBson(i_bson,iter,"00080016",*theRec.SOPClassUID); //(strcmp(bson_iter_key(&iter), "SOPClassUID") == 0) ? strcpy(theRec.SOPClassUID, bson_iter_utf8(&iter, 0)) : "";
@@ -690,12 +985,69 @@ IdxRecord* bson_to_idx_record(const bson_t* i_bson, IdxRecord& theRec)
             //GetParamInBson(i_bson, iter, "00100040", *theRec.InstanceDescription); //(strcmp(bson_iter_key(&iter), "InstanceDescription") == 0) ? strcpy(theRec.InstanceDescription, bson_iter_utf8(&iter, 0)) : "";
             GetParamInBson(i_bson, iter, "00080005", *theRec.SpecificCharacterSet); //(strcmp(bson_iter_key(&iter), "SpecificCharacterSet") == 0) ? strcpy(theRec.SpecificCharacterSet, bson_iter_utf8(&iter, 0)) : "";
 
-
             GetParamInBson(i_bson, iter, "00020001", *theRec.FileMetaInformationVersion);
             GetParamInBson(i_bson, iter, "00020002", *theRec.MediaStorageSOPClassUID);
             GetParamInBson(i_bson, iter, "00020003", *theRec.MediaStorageSOPInstanceUID);
             GetParamInBson(i_bson, iter, "00020010", *theRec.TransferSyntaxUID);
             GetParamInBson(i_bson, iter, "00020012", *theRec.ImplementationClassUID);
+            GetParamInBson(i_bson, iter, "00020013", *theRec.ImplementationVersionName);
+            GetParamInBson(i_bson, iter, "00041230", *theRec.DirectoryRecordType);
+            GetParamInBson(i_bson, iter, "00080008", *theRec.ImageType);
+            GetParamInBson(i_bson, iter, "00080022", *theRec.AcquisitionDate);
+            GetParamInBson(i_bson, iter, "00080023", *theRec.ContentDate);
+            GetParamInBson(i_bson, iter, "00080032", *theRec.AcquisitionTime);
+            GetParamInBson(i_bson, iter, "00080033", *theRec.ContentTime);
+            GetParamInBson(i_bson, iter, "00080070", *theRec.Manufacturer);
+            GetParamInBson(i_bson, iter, "00080080", *theRec.ManufacturerModelName);
+            GetParamInBson(i_bson, iter, "00120063", *theRec.PatientIdentityRemoved);
+            GetParamInBson(i_bson, iter, "00120064", *theRec.DeidentificationMethod);
+            GetParamInBson(i_bson, iter, "00180010", *theRec.ContrastBolusAgent);
+            GetParamInBson(i_bson, iter, "00180015", *theRec.BodyPartExamined);
+            GetParamInBson(i_bson, iter, "00180021", *theRec.ScanOptions);
+            GetParamInBson(i_bson, iter, "00180060", *theRec.KVP);
+            GetParamInBson(i_bson, iter, "00189315", *theRec.DataCollectionDiameter);
+            GetParamInBson(i_bson, iter, "00181020", *theRec.SoftwareVersions);
+            GetParamInBson(i_bson, iter, "00181151", *theRec.ReconstructionDiameter);
+            GetParamInBson(i_bson, iter, "00181190", *theRec.GantryDetectorTilt);
+            GetParamInBson(i_bson, iter, "00181130", *theRec.TableHeight);
+            GetParamInBson(i_bson, iter, "00181140", *theRec.RotationDirection);
+            GetParamInBson(i_bson, iter, "00181150", *theRec.ExposureTime);
+            GetParamInBson(i_bson, iter, "00181151", *theRec.XRayTubeCurrent);
+            GetParamInBson(i_bson, iter, "00181160", *theRec.FilterType);
+            GetParamInBson(i_bson, iter, "00181170", *theRec.GeneratorPower);
+            GetParamInBson(i_bson, iter, "00181190", *theRec.FocalSpots);
+            GetParamInBson(i_bson, iter, "00181210", *theRec.ConvolutionKernel);
+            GetParamInBson(i_bson, iter, "00185100", *theRec.PatientPosition);
+            GetParamInBson(i_bson, iter, "00189323", *theRec.ExposureModulationType);
+            GetParamInBson(i_bson, iter, "00189324", *theRec.EstimatedDoseSaving);
+            GetParamInBson(i_bson, iter, "00189345", *theRec.CTDIvol);
+            GetParamInBson(i_bson, iter, "00200012", *theRec.AcquisitionNumber);
+            GetParamInBson(i_bson, iter, "00200013", *theRec.InstanceNumber);
+            GetParamInBson(i_bson, iter, "00200020", *theRec.PatientOrientation);
+            GetParamInBson(i_bson, iter, "00200032", *theRec.ImagePositionPatient);
+            GetParamInBson(i_bson, iter, "00200037", *theRec.ImageOrientationPatient);
+            GetParamInBson(i_bson, iter, "00200052", *theRec.FrameOfReferenceUID);
+            GetParamInBson(i_bson, iter, "00201040", *theRec.PositionReferenceIndicator);
+            GetParamInBson(i_bson, iter, "00201041", *theRec.SliceLocation);
+            GetParamInBson(i_bson, iter, "00280002", *theRec.SamplesPerPixel);
+            GetParamInBson(i_bson, iter, "00280004", *theRec.PhotometricInterpretation);
+            GetParamInBson(i_bson, iter, "00280006", *theRec.PlanarConfiguration);
+            GetParamInBson(i_bson, iter, "00280008", *theRec.NumberOfFrames);
+            GetParamInBson(i_bson, iter, "00280010", *theRec.Rows);
+            GetParamInBson(i_bson, iter, "00280011", *theRec.Columns);
+            GetParamInBson(i_bson, iter, "00280030", *theRec.PixelSpacing);
+            GetParamInBson(i_bson, iter, "00280034", *theRec.PixelAspectRatio);
+            GetParamInBson(i_bson, iter, "00280100", *theRec.BitsAllocated);
+            GetParamInBson(i_bson, iter, "00280101", *theRec.BitsStored);
+            GetParamInBson(i_bson, iter, "00280102", *theRec.HighBit);
+            GetParamInBson(i_bson, iter, "00280103", *theRec.PixelRepresentation);
+            GetParamInBson(i_bson, iter, "00281050", *theRec.WindowCenter);
+            GetParamInBson(i_bson, iter, "00281051", *theRec.WindowWidth);
+            GetParamInBson(i_bson, iter, "00281052", *theRec.RescaleIntercept);
+            GetParamInBson(i_bson, iter, "00281053", *theRec.RescaleSlope);
+            GetParamInBson(i_bson, iter, "00880130", *theRec.StorageMediaFileSetID);
+            GetParamInBson(i_bson, iter, "00880140", *theRec.StorageMediaFileSetUID);
+            GetParamInBson(i_bson, iter, "7FE00010", *theRec.PixelData);
 
             //printf("Found a field named: %s\nvalue:%s\n", bson_iter_key(&iter), bson_iter_utf8(&iter, 0));
         }
@@ -704,6 +1056,58 @@ IdxRecord* bson_to_idx_record(const bson_t* i_bson, IdxRecord& theRec)
     return &theRec;
 }
 
+/*
+* 取得MongoDB的Query bson.
+*/
+bson_t* mongoDBGetQuery(DB_Private_Handle* phandle)
+{
+    DB_ElementList* plist;
+
+    // 將query轉bson
+    bson_t* query;
+    query = bson_new();
+    for (plist = phandle->findRequestList; plist; plist = plist->next)
+    {
+        if (plist->elem.PValueField.ptr.p != NULL)
+        {
+            std::string xtag = int_to_hex(plist->elem.XTag.key[0]) + int_to_hex(plist->elem.XTag.key[1]);
+            transform(xtag.begin(), xtag.end(), xtag.begin(), ::toupper);
+            std::string queryKey = xtag + ".Value.0";
+
+            std::string queryValue = plist->elem.PValueField.ptr.p;
+
+            ConsoleLog("QueryKey[" + queryKey + "]", "");
+            ConsoleLog("Xtag[" + xtag + "]", "");
+
+            if (strcmp(xtag.c_str(), "0020000D") == 0)
+            {
+                BSON_APPEND_UTF8(query, queryKey.c_str(), queryValue.c_str());
+            }
+            else if (strcmp(xtag.c_str(), "0020000E") == 0)
+            {
+                BSON_APPEND_UTF8(query, queryKey.c_str(), queryValue.c_str());
+            }
+            else
+            {
+                queryValue = "^" + queryValue;
+                queryValue = ReplaceString(queryValue, "*", ".*");
+                queryValue = ReplaceString(queryValue, "?", ".");
+                if (strcmp(xtag.c_str(), "00100010") == 0)
+                {
+                    std::string queryKey2 = xtag + ".Value.0.Alphabetic";
+                    bson_append_regex(query, queryKey2.c_str(), -1, queryValue.c_str(), "");
+                }
+                else
+                {
+                    bson_append_regex(query, queryKey.c_str(), -1, queryValue.c_str(), "");
+                }
+            }
+            ConsoleLog("QueryValue[" + queryValue + "]", "");
+        }
+    }
+
+    return query;
+}
 
 /*
 * 從MongoDB利用C-Find的參數找尋資料
@@ -732,40 +1136,8 @@ OFBool DcmQueryRetrieveIndexDatabaseHandle::mongoDBFindRecord(DB_Private_Handle*
     mongoClient = mongoc_client_new_from_uri(uri);
     if (mongoClient)
     {
-        // 將query轉bson
         bson_t* query;
-        query = bson_new();
-        for (plist = phandle->findRequestList; plist; plist = plist->next)
-        {
-            if (plist->elem.PValueField.ptr.p != NULL)
-            {
-                std::string xtag = int_to_hex(plist->elem.XTag.key[0]) + int_to_hex(plist->elem.XTag.key[1]);
-                transform(xtag.begin(), xtag.end(), xtag.begin(), ::toupper);
-                std::string queryKey = xtag + ".Value.0";
-
-                std::string queryValue = plist->elem.PValueField.ptr.p;
-                queryValue = "^" + queryValue;
-                queryValue = ReplaceString(queryValue, "*", ".*");
-                queryValue = ReplaceString(queryValue, "?", ".");
-
-                ConsoleLog("QueryKey[" + queryKey + "]", "");
-                ConsoleLog("QueryValue[" + queryValue + "]", "");
-
-                if (strcmp(xtag.c_str(), "0020000D") == 0)
-                {
-                    BSON_APPEND_UTF8(query, queryKey.c_str(), plist->elem.PValueField.ptr.p);
-                }
-                else if (strcmp(xtag.c_str(), "00100010") == 0)
-                {
-                    std::string queryKey2 = xtag + ".Value.0.Alphabetic";
-                    bson_append_regex(query, queryKey2.c_str(), -1, queryValue.c_str(), "");
-                }
-                else
-                {
-                    bson_append_regex(query, queryKey.c_str(), -1, queryValue.c_str(), "");
-                }
-            }
-        }
+        query = mongoDBGetQuery(phandle);
 
         mongoc_collection_t* collection;
         collection = mongoc_client_get_collection(mongoClient, mongoDB_name.c_str(), collection_name.c_str());
@@ -838,38 +1210,7 @@ static void mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_ElementList
     {
         // 將query轉bson
         bson_t* query;
-        query = bson_new();
-        for (plist = handle_->findRequestList; plist; plist = plist->next)
-        {
-            if (plist->elem.PValueField.ptr.p != NULL)
-            {
-                std::string xtag = int_to_hex(plist->elem.XTag.key[0]) + int_to_hex(plist->elem.XTag.key[1]);
-                transform(xtag.begin(), xtag.end(), xtag.begin(), ::toupper);
-                std::string queryKey = xtag + ".Value.0";
-
-                std::string queryValue = plist->elem.PValueField.ptr.p;
-                queryValue = "^" + queryValue;
-                queryValue = ReplaceString(queryValue, "*", ".*");
-                queryValue = ReplaceString(queryValue, "?", ".");
-
-                ConsoleLog("QueryKey[" + queryKey + "]", "");
-                ConsoleLog("QueryValue[" + queryValue + "]", "");
-
-                if (strcmp(xtag.c_str(), "0020000D") == 0)
-                {
-                    BSON_APPEND_UTF8(query, queryKey.c_str(), plist->elem.PValueField.ptr.p);
-                }
-                else if (strcmp(xtag.c_str(), "00100010") == 0)
-                {
-                    std::string queryKey2 = xtag + ".Value.0.Alphabetic";
-                    bson_append_regex(query, queryKey2.c_str(), -1, queryValue.c_str(), "");
-                }
-                else
-                {
-                    bson_append_regex(query, queryKey.c_str(), -1, queryValue.c_str(), "");
-                }
-            }
-        }
+        query = mongoDBGetQuery(handle_);
 
         mongoc_collection_t* collection;
         collection = mongoc_client_get_collection(mongoClient, mongoDB_name.c_str(), collection_name.c_str());
@@ -889,7 +1230,7 @@ static void mongoDBFindRecordsForMove(DB_Private_Handle* handle_, DB_ElementList
             }
 
             pidxlist->rec = new IdxRecord();
-            //bson_to_idx_record(resultBson, *pidxlist->rec);
+            bson_to_idx_record(resultBson, *pidxlist->rec);
 
             pidxlist->next = NULL;
             handle_->NumberRemainOperations++;
