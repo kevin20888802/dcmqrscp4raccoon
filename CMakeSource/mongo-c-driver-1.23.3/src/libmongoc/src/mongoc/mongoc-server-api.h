@@ -19,7 +19,7 @@
 #ifndef MONGOC_SERVER_API_H
 #define MONGOC_SERVER_API_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-optional.h"
 #include "mongoc-macros.h"

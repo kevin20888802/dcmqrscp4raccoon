@@ -19,7 +19,7 @@
 #ifndef MONGOC_GRIDFS_PRIVATE_H
 #define MONGOC_GRIDFS_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-read-prefs.h"
 #include "mongoc-write-concern.h"

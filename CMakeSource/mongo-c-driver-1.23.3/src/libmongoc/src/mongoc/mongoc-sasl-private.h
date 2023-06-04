@@ -19,7 +19,7 @@
 #ifndef MONGOC_SASL_PRIVATE_H
 #define MONGOC_SASL_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-uri.h"
 #include "mongoc-stream-private.h"
 #include "mongoc-stream.h"

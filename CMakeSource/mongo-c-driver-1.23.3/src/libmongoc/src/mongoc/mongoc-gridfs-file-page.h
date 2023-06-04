@@ -19,7 +19,7 @@
 #ifndef MONGOC_GRIDFS_FILE_PAGE_H
 #define MONGOC_GRIDFS_FILE_PAGE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-stream.h"
 #include "mongoc-gridfs-file.h"

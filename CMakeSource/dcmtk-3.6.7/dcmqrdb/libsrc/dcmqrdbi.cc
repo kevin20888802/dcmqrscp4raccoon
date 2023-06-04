@@ -39,6 +39,7 @@ END_EXTERN_C
 
 
 #include "../../../mongo-c-driver-1.23.3/src/libmongoc/src/mongoc/mongoc.h"
+#include "../../../mongo-c-driver-1.23.3/src/libbson/src/bson/bson.h"
 #include "dcmtk/ofstd/ofstd.h"
 #include "dcmtk/dcmqrdb/dcmqrdbs.h"
 #include "dcmtk/dcmqrdb/dcmqrdbi.h"

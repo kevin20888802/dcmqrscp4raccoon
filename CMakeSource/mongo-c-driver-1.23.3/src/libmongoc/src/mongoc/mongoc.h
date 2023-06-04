@@ -19,7 +19,7 @@
 #define MONGOC_H
 
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #define MONGOC_INSIDE
 #include "mongoc-macros.h"

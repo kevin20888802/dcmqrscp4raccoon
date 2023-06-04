@@ -19,7 +19,7 @@
 #ifndef MONGOC_FLAGS_PRIVATE_H
 #define MONGOC_FLAGS_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 BSON_BEGIN_DECLS
 

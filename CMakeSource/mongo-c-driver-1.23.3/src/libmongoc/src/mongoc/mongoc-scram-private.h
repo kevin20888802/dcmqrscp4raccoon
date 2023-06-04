@@ -21,7 +21,7 @@
 #define MONGOC_SCRAM_PRIVATE_H
 
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-crypto-private.h"
 
 

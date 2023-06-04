@@ -21,7 +21,7 @@
 #define MONGOC_BULK_OPERATION_H
 
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 #include "mongoc-write-concern.h"

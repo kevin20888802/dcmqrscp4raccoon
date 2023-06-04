@@ -21,7 +21,7 @@
 
 #include "mongoc-config.h"
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-topology-description-private.h"
 #include "mongoc-server-description-private.h"

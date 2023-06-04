@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #ifdef _POSIX_VERSION
 #include <sys/utsname.h>

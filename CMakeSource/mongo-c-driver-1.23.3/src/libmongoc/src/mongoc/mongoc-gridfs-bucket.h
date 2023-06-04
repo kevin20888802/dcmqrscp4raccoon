@@ -19,7 +19,7 @@
 #ifndef MONGOC_GRIDFS_BUCKET_H
 #define MONGOC_GRIDFS_BUCKET_H
 
-#include "bson/bson.h"
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-collection.h"
 #include "mongoc-database.h"
 #include "mongoc-stream.h"

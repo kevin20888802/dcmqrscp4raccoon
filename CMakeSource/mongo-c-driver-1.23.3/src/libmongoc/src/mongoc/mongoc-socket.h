@@ -19,7 +19,7 @@
 #ifndef MONGOC_SOCKET_H
 #define MONGOC_SOCKET_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-macros.h"
 #include "mongoc-config.h"
 

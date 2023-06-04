@@ -19,7 +19,7 @@
 #ifndef MONGOC_COLLECTION_PRIVATE_H
 #define MONGOC_COLLECTION_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-client.h"
 

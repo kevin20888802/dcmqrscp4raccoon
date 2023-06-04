@@ -19,7 +19,7 @@
 #ifndef MONGOC_CLIENT_SESSION_PRIVATE_H
 #define MONGOC_CLIENT_SESSION_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-client-session.h"
 
 /* error labels: see Transactions Spec */

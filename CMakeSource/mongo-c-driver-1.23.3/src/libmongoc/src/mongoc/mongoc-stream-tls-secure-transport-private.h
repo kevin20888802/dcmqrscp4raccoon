@@ -20,7 +20,7 @@
 #define MONGOC_STREAM_TLS_SECURE_TRANSPORT_PRIVATE_H
 
 #ifdef MONGOC_ENABLE_SSL_SECURE_TRANSPORT
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include <Security/Security.h>
 

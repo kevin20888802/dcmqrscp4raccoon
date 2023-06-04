@@ -21,7 +21,7 @@
 
 #include "mongoc-config.h"
 #include "mongoc-cluster-private.h"
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 bool
 _mongoc_cluster_auth_node_sspi (mongoc_cluster_t *cluster,

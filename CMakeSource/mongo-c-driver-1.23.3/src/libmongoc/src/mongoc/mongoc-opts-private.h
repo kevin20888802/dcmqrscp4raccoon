@@ -3,7 +3,7 @@
 #ifndef MONGOC_OPTS_H
 #define MONGOC_OPTS_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-client-session.h"
 #include "mongoc-bulk-operation-private.h"

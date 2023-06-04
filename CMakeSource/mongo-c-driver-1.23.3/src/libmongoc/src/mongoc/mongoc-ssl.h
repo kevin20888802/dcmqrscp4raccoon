@@ -19,7 +19,7 @@
 #ifndef MONGOC_SSL_H
 #define MONGOC_SSL_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 

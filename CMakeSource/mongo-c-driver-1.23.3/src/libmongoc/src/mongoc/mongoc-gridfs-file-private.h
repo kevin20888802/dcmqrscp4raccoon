@@ -19,7 +19,7 @@
 #ifndef MONGOC_GRIDFS_FILE_PRIVATE_H
 #define MONGOC_GRIDFS_FILE_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-gridfs.h"
 #include "mongoc-gridfs-file.h"

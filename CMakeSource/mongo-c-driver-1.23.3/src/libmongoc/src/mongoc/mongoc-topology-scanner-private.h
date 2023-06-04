@@ -21,7 +21,7 @@
 
 /* TODO: rename to TOPOLOGY scanner */
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-async-private.h"
 #include "mongoc-async-cmd-private.h"
 #include "mongoc-handshake-private.h"

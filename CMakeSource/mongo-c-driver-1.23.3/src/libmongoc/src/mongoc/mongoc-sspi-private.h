@@ -19,7 +19,7 @@
 #ifndef MONGOC_SSPI_PRIVATE_H
 #define MONGOC_SSPI_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-sasl-private.h"
 
 

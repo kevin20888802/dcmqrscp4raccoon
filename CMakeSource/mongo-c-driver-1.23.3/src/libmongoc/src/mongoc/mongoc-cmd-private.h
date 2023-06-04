@@ -27,7 +27,7 @@
 #ifndef MONGOC_CMD_PRIVATE_H
 #define MONGOC_CMD_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-server-api.h"
 #include "mongoc-server-stream-private.h"

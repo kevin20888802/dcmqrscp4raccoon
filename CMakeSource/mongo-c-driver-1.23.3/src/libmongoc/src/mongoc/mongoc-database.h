@@ -19,7 +19,7 @@
 #ifndef MONGOC_DATABASE_H
 #define MONGOC_DATABASE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 #include "mongoc-cursor.h"

@@ -20,7 +20,7 @@
 #define MONGOC_STREAM_TLS_LIBRESSL_PRIVATE_H
 
 #ifdef MONGOC_ENABLE_SSL_LIBRESSL
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include <tls.h>
 

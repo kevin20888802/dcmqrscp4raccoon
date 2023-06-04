@@ -18,7 +18,7 @@
 
 #ifdef MONGOC_ENABLE_SSL_LIBRESSL
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-log.h"
 #include "mongoc-trace-private.h"

@@ -15,7 +15,7 @@
  */
 
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-array-private.h"
 #include "mongoc-buffer-private.h"

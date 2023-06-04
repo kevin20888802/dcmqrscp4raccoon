@@ -19,7 +19,7 @@
 #ifndef MONGOC_URI_H
 #define MONGOC_URI_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 #include "mongoc-host-list.h"

@@ -16,7 +16,7 @@
 
 #include "mongoc-prelude.h"
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-client-session-private.h"
 #include "mongoc-collection-private.h"
 #include "mongoc-write-command-private.h"

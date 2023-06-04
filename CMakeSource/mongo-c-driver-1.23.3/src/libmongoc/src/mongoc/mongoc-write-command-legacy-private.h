@@ -20,7 +20,7 @@
 #ifndef MONGOC_WRITE_COMMAND_LEGACY_PRIVATE_H
 #define MONGOC_WRITE_COMMAND_LEGACY_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-client-private.h"
 #include "mongoc-write-command-private.h"
 

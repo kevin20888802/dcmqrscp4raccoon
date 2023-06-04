@@ -19,7 +19,7 @@
 #ifndef MONGOC_SHARED_H
 #define MONGOC_SHARED_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include <stddef.h>
 

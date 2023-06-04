@@ -19,7 +19,7 @@
 #ifndef MONGOC_STREAM_TLS_H
 #define MONGOC_STREAM_TLS_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 #include "mongoc-ssl.h"

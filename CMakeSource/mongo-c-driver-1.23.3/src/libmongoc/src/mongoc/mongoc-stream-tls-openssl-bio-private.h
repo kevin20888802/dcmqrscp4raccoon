@@ -20,7 +20,7 @@
 #define MONGOC_STREAM_TLS_OPENSSL_BIO_PRIVATE_H
 
 #ifdef MONGOC_ENABLE_SSL_OPENSSL
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include <openssl/bio.h>
 #include <openssl/ssl.h>

@@ -22,7 +22,7 @@
 #include "mongoc-uri.h"
 #include "mongoc-cluster-private.h"
 #include "mongoc-sasl-private.h"
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include <sasl/sasl.h>
 
 

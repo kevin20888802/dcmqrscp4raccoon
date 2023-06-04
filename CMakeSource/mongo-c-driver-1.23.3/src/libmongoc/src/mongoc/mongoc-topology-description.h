@@ -19,7 +19,7 @@
 #ifndef MONGOC_TOPOLOGY_DESCRIPTION_H
 #define MONGOC_TOPOLOGY_DESCRIPTION_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 #include "mongoc-read-prefs.h"

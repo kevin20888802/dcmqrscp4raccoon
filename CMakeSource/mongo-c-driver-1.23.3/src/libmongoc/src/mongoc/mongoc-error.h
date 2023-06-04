@@ -19,7 +19,7 @@
 #ifndef MONGOC_ERRORS_H
 #define MONGOC_ERRORS_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 

@@ -16,7 +16,7 @@
 
 #include "mongoc-prelude.h"
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include <stddef.h>
 
 BSON_BEGIN_DECLS

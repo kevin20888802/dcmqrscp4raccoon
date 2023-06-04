@@ -17,7 +17,7 @@
 #include "./mongoc-shared-private.h"
 
 #include "common-thread-private.h"
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 typedef struct _mongoc_shared_ptr_aux {
    int refcount;

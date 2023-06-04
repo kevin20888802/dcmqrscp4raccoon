@@ -21,7 +21,7 @@
 #define MONGOC_IOVEC_H
 
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #ifdef _WIN32
 #include <stddef.h>

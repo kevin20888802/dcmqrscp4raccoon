@@ -19,7 +19,7 @@
 #ifndef MONGOC_THREAD_PRIVATE_H
 #define MONGOC_THREAD_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "common-thread-private.h"
 #include "mongoc-config.h"

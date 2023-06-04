@@ -20,7 +20,7 @@
 #ifndef MONGOC_HANDSHAKE_H
 #define MONGOC_HANDSHAKE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 

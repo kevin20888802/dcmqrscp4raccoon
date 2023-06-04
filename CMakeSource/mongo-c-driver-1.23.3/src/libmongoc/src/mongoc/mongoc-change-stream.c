@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-cluster-private.h"
 #include "mongoc-change-stream-private.h"
 #include "mongoc-collection-private.h"

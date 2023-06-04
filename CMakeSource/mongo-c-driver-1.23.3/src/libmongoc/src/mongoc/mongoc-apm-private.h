@@ -19,7 +19,7 @@
 #ifndef MONGOC_APM_PRIVATE_H
 #define MONGOC_APM_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-apm.h"
 
 BSON_BEGIN_DECLS

@@ -19,7 +19,7 @@
 #ifndef MONGOC_APM_H
 #define MONGOC_APM_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 #include "mongoc-host-list.h"

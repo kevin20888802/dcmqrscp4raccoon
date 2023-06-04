@@ -19,7 +19,7 @@
 #ifndef MONGOC_CURSOR_H
 #define MONGOC_CURSOR_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 #include "mongoc-host-list.h"

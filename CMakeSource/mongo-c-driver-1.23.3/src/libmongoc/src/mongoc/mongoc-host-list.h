@@ -19,7 +19,7 @@
 #ifndef MONGOC_HOST_LIST_H
 #define MONGOC_HOST_LIST_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 
 BSON_BEGIN_DECLS

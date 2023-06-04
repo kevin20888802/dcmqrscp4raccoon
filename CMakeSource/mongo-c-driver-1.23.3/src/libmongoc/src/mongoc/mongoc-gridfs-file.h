@@ -19,7 +19,7 @@
 #ifndef MONGOC_GRIDFS_FILE_H
 #define MONGOC_GRIDFS_FILE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 #include "mongoc-socket.h"

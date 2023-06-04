@@ -20,7 +20,7 @@
 
 #include "utlist.h"
 #include "mongoc-trace-private.h"
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include <common-thread-private.h>
 
 typedef struct _cache_entry_list_t {

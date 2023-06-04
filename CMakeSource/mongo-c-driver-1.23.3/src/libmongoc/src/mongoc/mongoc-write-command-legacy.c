@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-write-command-legacy-private.h"
 #include "mongoc-trace-private.h"

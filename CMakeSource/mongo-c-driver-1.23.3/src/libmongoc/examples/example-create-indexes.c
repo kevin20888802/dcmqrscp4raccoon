@@ -124,11 +124,11 @@ main (int argc, char *argv[])
    BSON_APPEND_UTF8(query, "hello", "MMMMMMMongoDB");
    mongoc_cursor_t* cursor;
    cursor = mongoc_collection_find_with_opts(collection, query, NULL, NULL);
-   while (mongoc_cursor_next(cursor, &doc)) {
+   /*while (mongoc_cursor_next(cursor, &doc)) {
        str = bson_as_canonical_extended_json(doc, NULL);
        printf("%s\n", str);
        bson_free(str);
-   }
+   }*/
 
    if (mongoc_cursor_error(cursor, &error)) {
        fprintf(stderr, "An error occurred: %s\n", error.message);

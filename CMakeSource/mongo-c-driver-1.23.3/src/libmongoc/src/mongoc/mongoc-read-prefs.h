@@ -19,7 +19,7 @@
 #ifndef MONGOC_READ_PREFS_H
 #define MONGOC_READ_PREFS_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 #include "mongoc-config.h"

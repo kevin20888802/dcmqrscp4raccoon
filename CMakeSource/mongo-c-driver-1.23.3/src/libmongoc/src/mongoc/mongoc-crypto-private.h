@@ -17,7 +17,7 @@
 #include "mongoc-prelude.h"
 
 #include "mongoc-config.h"
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #ifdef MONGOC_ENABLE_CRYPTO
 

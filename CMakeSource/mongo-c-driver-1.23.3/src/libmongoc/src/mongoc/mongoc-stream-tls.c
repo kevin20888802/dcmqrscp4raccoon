@@ -20,7 +20,7 @@
 
 #include <errno.h>
 #include <string.h>
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-log.h"
 #include "mongoc-trace-private.h"

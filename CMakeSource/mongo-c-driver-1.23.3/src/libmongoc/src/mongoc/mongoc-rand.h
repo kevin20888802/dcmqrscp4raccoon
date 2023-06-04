@@ -21,7 +21,7 @@
 #define MONGOC_RAND_H
 
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 

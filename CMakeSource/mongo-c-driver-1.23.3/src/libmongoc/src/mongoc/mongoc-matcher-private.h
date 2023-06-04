@@ -19,7 +19,7 @@
 #ifndef MONGOC_MATCHER_PRIVATE_H
 #define MONGOC_MATCHER_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-matcher-op-private.h"
 

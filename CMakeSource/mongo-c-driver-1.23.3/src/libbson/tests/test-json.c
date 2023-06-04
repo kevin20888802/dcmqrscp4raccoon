@@ -747,12 +747,11 @@ test_bson_corrupt_binary (void)
 }
 
 #if !defined(BSON_HAVE_RAND_R) && !defined(_WIN32)
-static int
-rand_r (unsigned int *seed)
+/*static int rand_r(unsigned int* seed)
 {
    srand (*seed);
    return rand ();
-}
+}*/
 #endif
 
 #ifdef _WIN32

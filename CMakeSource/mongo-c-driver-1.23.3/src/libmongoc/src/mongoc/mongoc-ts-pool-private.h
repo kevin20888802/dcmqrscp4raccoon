@@ -3,7 +3,7 @@
 #ifndef MONGOC_TS_POOL_PRIVATE_H
 #define MONGOC_TS_POOL_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include <stddef.h>
 

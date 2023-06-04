@@ -18,7 +18,7 @@
 
 #ifdef MONGOC_ENABLE_SSL
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-ssl.h"
 #include "mongoc-ssl-private.h"
 #include "mongoc-log.h"

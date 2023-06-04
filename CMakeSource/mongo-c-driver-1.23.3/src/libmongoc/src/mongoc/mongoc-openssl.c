@@ -18,7 +18,7 @@
 
 #ifdef MONGOC_ENABLE_SSL_OPENSSL
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include <limits.h>
 #include <openssl/bio.h>
 #include <openssl/ssl.h>

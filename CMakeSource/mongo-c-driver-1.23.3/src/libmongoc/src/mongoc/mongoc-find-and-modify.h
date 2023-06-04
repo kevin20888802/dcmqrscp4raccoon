@@ -19,7 +19,7 @@
 #ifndef MONGOC_FIND_AND_MODIFY_H
 #define MONGOC_FIND_AND_MODIFY_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 

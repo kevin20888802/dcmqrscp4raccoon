@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-error.h"
 #include "mongoc-error-private.h"

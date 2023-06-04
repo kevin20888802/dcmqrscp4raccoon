@@ -20,7 +20,7 @@
 #ifndef MONGOC_VERSION_FUNCTIONS_H
 #define MONGOC_VERSION_FUNCTIONS_H
 
-#include <bson/bson.h> /* for "bool" */
+#include "../../../libbson/src/bson/bson.h" /* for "bool" */
 
 #include "mongoc-macros.h"
 

@@ -15,7 +15,7 @@
  */
 
 /* for size_t */
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-config.h"
 
 #include "mongoc-cluster-private.h"

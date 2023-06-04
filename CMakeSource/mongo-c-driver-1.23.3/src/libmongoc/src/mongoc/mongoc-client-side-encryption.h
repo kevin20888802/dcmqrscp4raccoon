@@ -19,7 +19,7 @@
 #ifndef MONGOC_CLIENT_SIDE_ENCRYPTION_H
 #define MONGOC_CLIENT_SIDE_ENCRYPTION_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 /* Forward declare */
 struct _mongoc_client_t;

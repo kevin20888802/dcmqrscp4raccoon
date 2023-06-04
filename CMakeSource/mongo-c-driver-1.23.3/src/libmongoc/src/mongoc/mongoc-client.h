@@ -19,7 +19,7 @@
 #ifndef MONGOC_CLIENT_H
 #define MONGOC_CLIENT_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-apm.h"
 #include "mongoc-client-side-encryption.h"

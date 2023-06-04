@@ -19,7 +19,7 @@
 #ifndef MONGOC_SECURE_CHANNEL_PRIVATE_H
 #define MONGOC_SECURE_CHANNEL_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-ssl.h"
 #include "mongoc-stream-tls.h"

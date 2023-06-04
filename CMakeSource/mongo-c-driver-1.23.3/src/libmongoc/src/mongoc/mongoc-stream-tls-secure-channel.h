@@ -20,7 +20,7 @@
 #define MONGOC_STREAM_TLS_SECURE_CHANNEL_H
 
 #ifdef MONGOC_ENABLE_SSL_SECURE_CHANNEL
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 

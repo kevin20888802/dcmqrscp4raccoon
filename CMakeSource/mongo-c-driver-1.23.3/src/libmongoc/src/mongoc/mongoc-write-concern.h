@@ -19,7 +19,7 @@
 #ifndef MONGOC_WRITE_CONCERN_H
 #define MONGOC_WRITE_CONCERN_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-macros.h"
 

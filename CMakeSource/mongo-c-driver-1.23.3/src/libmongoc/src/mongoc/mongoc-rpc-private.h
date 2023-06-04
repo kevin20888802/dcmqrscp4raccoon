@@ -19,7 +19,7 @@
 #ifndef MONGOC_RPC_PRIVATE_H
 #define MONGOC_RPC_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include <stddef.h>
 
 #include "mongoc-array-private.h"

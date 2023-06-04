@@ -17,7 +17,7 @@
 
 #ifdef MONGOC_ENABLE_CRYPTO
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-log.h"
 #include "mongoc-crypto-private.h"
 #if defined(MONGOC_ENABLE_CRYPTO_LIBCRYPTO)

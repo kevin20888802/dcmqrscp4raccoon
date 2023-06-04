@@ -19,7 +19,7 @@
 #ifndef MONGOC_COLLECTION_H
 #define MONGOC_COLLECTION_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-change-stream.h"
 #include "mongoc-macros.h"

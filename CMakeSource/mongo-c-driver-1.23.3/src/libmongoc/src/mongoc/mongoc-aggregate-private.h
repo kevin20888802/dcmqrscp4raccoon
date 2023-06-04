@@ -19,7 +19,7 @@
 #ifndef MONGOC_AGGREGATE_PRIVATE_H
 #define MONGOC_AGGREGATE_PRIVATE_H
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-client.h"
 #include "mongoc-flags.h"

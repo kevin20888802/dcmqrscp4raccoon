@@ -21,7 +21,7 @@
 #define MONGOC_TRACE_PRIVATE_H
 
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include <ctype.h>
 
 #include "mongoc-log.h"

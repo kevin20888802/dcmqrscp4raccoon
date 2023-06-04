@@ -15,7 +15,7 @@
  */
 
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 
 #include "mongoc-client.h"
 #include "mongoc-async-cmd-private.h"

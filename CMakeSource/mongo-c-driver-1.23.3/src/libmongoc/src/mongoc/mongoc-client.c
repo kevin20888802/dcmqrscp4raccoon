@@ -15,7 +15,7 @@
  */
 
 
-#include <bson/bson.h>
+#include "../../../libbson/src/bson/bson.h"
 #include "mongoc-config.h"
 #ifdef MONGOC_HAVE_DNSAPI
 /* for DnsQuery_UTF8 */
