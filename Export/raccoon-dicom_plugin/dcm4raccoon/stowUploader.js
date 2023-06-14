@@ -94,9 +94,12 @@ module.exports.deleteTempDir = function deleteTempDir() {
         if (err) throw err;
 
         for (const file of files) {
-            fs.unlink(path.join(tempDir, file), (err) => {
-                if (err) throw err;
-            });
+            if(file != "index.dat")
+            {
+				fs.unlink(path.join(tempDir, file), (err) => {
+					if (err) throw err;
+				});
+			}
         }
     });
 }
