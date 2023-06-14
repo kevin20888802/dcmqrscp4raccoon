@@ -9,7 +9,24 @@
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
-      "ctestCommandArgs": ""
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "ENABLE_SSL",
+          "value": "OFF",
+          "type": "STRING"
+        },
+        {
+          "name": "ENABLE_MONGODB_AWS_AUTH",
+          "value": "OFF",
+          "type": "STRING"
+        },
+        {
+          "name": "ENABLE_STATIC",
+          "value": "ON",
+          "type": "STRING"
+        }
+      ]
     },
     {
       "name": "Linux-GCC-Release",

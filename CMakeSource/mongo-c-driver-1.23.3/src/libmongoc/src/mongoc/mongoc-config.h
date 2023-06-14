@@ -102,7 +102,7 @@
  * MONGOC_ENABLE_SSL_OPENSSL is set from configure to determine if we are
  * compiled with OpenSSL support.
  */
-#define MONGOC_ENABLE_SSL_OPENSSL 1
+#define MONGOC_ENABLE_SSL_OPENSSL 0
 
 #if MONGOC_ENABLE_SSL_OPENSSL != 1
 #  undef MONGOC_ENABLE_SSL_OPENSSL
@@ -124,7 +124,7 @@
  * MONGOC_ENABLE_SSL is set from configure to determine if we are
  * compiled with any SSL support.
  */
-#define MONGOC_ENABLE_SSL 1
+#define MONGOC_ENABLE_SSL 0
 
 #if MONGOC_ENABLE_SSL != 1
 #  undef MONGOC_ENABLE_SSL
@@ -155,6 +155,7 @@
 /*
  * Use ASN1_STRING_get0_data () rather than the deprecated ASN1_STRING_data
  */
+
 #define MONGOC_HAVE_ASN1_STRING_GET0_DATA 1
 
 #if MONGOC_HAVE_ASN1_STRING_GET0_DATA != 1
@@ -242,7 +243,7 @@
  * MONGOC_HAVE_RES_NSEARCH is set from configure to determine if we
  * have thread-safe res_nsearch().
  */
-#define MONGOC_HAVE_RES_NSEARCH 1
+#define MONGOC_HAVE_RES_NSEARCH 0
 
 #if MONGOC_HAVE_RES_NSEARCH != 1
 #  undef MONGOC_HAVE_RES_NSEARCH
@@ -412,7 +413,7 @@ enum {
 /*
  * Set if building with AWS IAM support.
  */
-#define MONGOC_ENABLE_MONGODB_AWS_AUTH 1
+#define MONGOC_ENABLE_MONGODB_AWS_AUTH 0
 
 #if MONGOC_ENABLE_MONGODB_AWS_AUTH != 1
 #  undef MONGOC_ENABLE_MONGODB_AWS_AUTH

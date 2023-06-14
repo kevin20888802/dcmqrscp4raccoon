@@ -12,6 +12,5 @@ DCMTK_ADD_LIBRARY(dcmqrdb
   dcmqrsrv.cc
   dcmqrtis.cc
 )
-target_link_libraries(dcmqrdb bson_static mongoc_static)
 
 DCMTK_TARGET_LINK_MODULES(dcmqrdb ofstd dcmdata dcmnet)

@@ -15,7 +15,7 @@
  */
 
 #include "mongoc-prelude.h"
-
+/*
 #ifndef MONGOC_OPENSSL_PRIVATE_H
 #define MONGOC_OPENSSL_PRIVATE_H
 
@@ -58,5 +58,5 @@ _mongoc_tlsfeature_has_status_request (const uint8_t *data, int length);
 
 BSON_END_DECLS
 
-
+*/
 #endif /* MONGOC_OPENSSL_PRIVATE_H */
