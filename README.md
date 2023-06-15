@@ -5,7 +5,7 @@ Raccoon-dicom插件: dcmqrscp4raccoon 是一個使用NodeJS開發的插件，
 
 該插件使用經過修改過後的dcmtk的dcmqrscp，使其儲存的方式從原先的二進制檔案資料庫，改成儲存到Raccoon-dicom醫學影像伺服器使用的MongoDB相同的資料庫，最終透過插件的方式與Raccoon-dicom醫學影像伺服器整合。
 
-該插件使得原本只支援dicomWeb協定的Raccoon-dicom伺服器能夠同時支援DIMSE協定的C-STORE、C-FIND和C-MOVE等操作。
+該插件使得原本的Raccoon-dicom伺服器能夠以dcmtk的方式，同時支援DIMSE協定的C-STORE、C-FIND和C-MOVE等操作。
 
 ## 安裝方法
 按照以下步驟安裝dcmqrscp4raccoon插件：

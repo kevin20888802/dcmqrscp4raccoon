@@ -45,7 +45,24 @@
       "remoteCopySources": true,
       "rsyncCommandArgs": "-t --delete",
       "remoteCopyBuildOutput": false,
-      "remoteCopySourcesMethod": "rsync"
+      "remoteCopySourcesMethod": "rsync",
+      "variables": [
+        {
+          "name": "ENABLE_SSL",
+          "value": "OFF",
+          "type": "STRING"
+        },
+        {
+          "name": "ENABLE_MONGODB_AWS_AUTH",
+          "value": "OFF",
+          "type": "STRING"
+        },
+        {
+          "name": "ENABLE_STATIC",
+          "value": "ON",
+          "type": "STRING"
+        }
+      ]
     }
   ]
 }
