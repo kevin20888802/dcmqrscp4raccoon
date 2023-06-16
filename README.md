@@ -7,30 +7,48 @@ Raccoon-dicom插件: dcmqrscp4raccoon 是一個使用NodeJS開發的插件，
 
 該插件使得原本的Raccoon-dicom伺服器能夠以dcmtk的方式，同時支援DIMSE協定的C-STORE、C-FIND和C-MOVE等操作。
 
-## 安裝方法
-按照以下步驟安裝dcmqrscp4raccoon插件：
-
-1. 將 /Export/raccoon-dicom_plugin/ 資料夾中的所有檔案和資料夾複製到Raccoon-dicom伺服器的根目錄下。
-
-2. 根據需要修改 plugin/config.js 和 plugin/dcm4raccoon/dcmqrscp.cfg 配置檔案。請注意，在 dcmqrscp.cfg 檔案中的 AETable 需要使用IP位址而不是主機名稱。建議採用與原始的dcmtk的dcmqrscp相同的配置方法。
-
-3. 儲存對配置檔案所做的更改。
-
-
 ## 先決條件
 使用dcmqrscp4raccoon插件需要滿足以下先決條件：
 
-- Raccoon-dicom伺服器
+- 部署好[Raccoon-dicom伺服器](https://github.com/Chinlinlee/raccoon-dicom)
+
+## 安裝方法
+按照以下步驟安裝dcmqrscp4raccoon插件：
+
+1. 於此專案的根目錄中找到 `Export/raccoon-dicom_plugin/` 資料夾
+
+2. 將`Export/raccoon-dicom_plugin/`中的所有檔案和資料夾複製到[Raccoon-dicom伺服器](https://github.com/Chinlinlee/raccoon-dicom)的`plugins`目錄下。
+
+3. 根據需要修改 `plugins/config.js` 和 `plugins/dcm4raccoon/dcmqrscp.cfg` 配置檔案。
+    #### ⚠️ 請注意，在 dcmqrscp.cfg 檔案中的 AETable 需要使用IP位址而不是主機名稱。建議採用與原始的dcmtk的dcmqrscp相同的配置方法。
+
+4. 儲存對配置檔案所做的更改。
 
 ## 使用方法
-1. 執行以下命令啟動Raccoon-dicom伺服器插件：
+#### ⚠️ 請先停止正在運行中的[Raccoon-dicom伺服器](https://github.com/Chinlinlee/raccoon-dicom)
 
->> node server.js
+1. 執行以下命令啟動dcmqrscp4raccoon插件：
+```bash
+# 你可以把Raccoon-dicom伺服器的安裝根目錄匯出為環境變數
+cd %Raccoon-dicom_HOME% # Windows
+cd $Raccoon-dicom_HOME # Linux
+npm install request
+node plugins/dcm4raccoon/index.js
+```
 
 2. dcmqrscp4raccoon插件現在會為Raccoon-dicom伺服器啟用DIMSE協定支援，從而使其能夠執行C-STORE、C-FIND和C-MOVE操作。
+
+3. 重起啟動Raccoon-dicom伺服器 (您可以參考以下指令)
+```bash
+# 請在新的terminal視窗中(又稱CMD或命令提示字元)操作
+cd %Raccoon-dicom_HOME%
+npm install
+node server.js
+```
 
 ## 測試環境
 dcmqrscp4raccoon插件已在以下環境中成功測試：
 
 - Windows 11
 - Ubuntu 23.04
+
