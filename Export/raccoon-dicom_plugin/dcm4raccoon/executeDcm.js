@@ -4,6 +4,7 @@
 const fs = require('fs');
 const path = require("path");
 const { spawn } = require('node:child_process');
+const { exec } = require('child_process');
 const { moveDicomFilesToTempDir, uploadDicomFilesInTempDir, deleteTempDir } = require("./stowUploader");
 const { raccoonConfig } = require("../../config-class");
 const { pluginsConfig } = require("../config");
@@ -12,6 +13,7 @@ const dicomFilePath = configData.storepath;
 const maxRetryTimes = 3;
 let retryTimes = 0;
 let isChecking = false;
+let isShuttingDown = false;
 
 module.exports.runDCM = async function () {
     executeDCM();
@@ -54,24 +56,85 @@ async function onEverySec() {
     await onEverySec();
 }
 
+function checkProcessRunning(processName) {
+    return new Promise((resolve, reject) => {
+      let command = '';
+      if (process.platform === 'win32') {
+        command = `tasklist /FI "IMAGENAME eq ${processName}" /NH`;
+      } else {
+        command = `pgrep ${processName}`;
+      }
+  
+      exec(command, (error, stdout) => {
+        if (error) {
+          if(process.platform === 'win32') {
+            reject(error);
+            return;
+          } else {
+            resolve(false);
+          }
+        }
+  
+        const output = stdout.toString().trim();
+        const isRunning = process.platform === 'win32' ? output.includes(processName) : output !== '';
+        console.log("checkprocessoutput:" + output);
+        resolve(isRunning);
+      });
+    });
+  }
+
+
+let processName = '';
+if (process.platform === 'win32') {
+    processName = 'dcmqrscp.exe';
+} else {
+    processName = 'dcmqrscp';
+}
+
+async function cleanupDCM() {
+    return checkProcessRunning(processName)
+      .then((isRunning) => {
+        if (isRunning) {
+          console.log(`[dcm4raccoon] Closing ${processName}...`);
+          return killProcess(processName);
+        }
+        else {
+            console.log(`[dcm4raccoon] ${processName} is not running.`);
+        }
+      })
+      .catch((error) => {
+        console.error('[dcm4raccoon] Error:', error);
+      });
+}
+
 async function executeDCM() {
     if (!isChecking) {
         onEverySec();
     }
+    checkProcessRunning(processName)
+    .then(async (isRunning) => {
+        if (isRunning) {
+            console.log(`[dcm4raccoon] ${processName} is running, killing it.`);
+        } 
+        await cleanupDCM();
+        // Start the dcmqrscp.
+        console.log("[dcm4raccoon] Starting dcmqrscp.");
+        updateDcmqrscpMongoConfig();
+        var dcmService;
+        if (process.platform === "win32") { // windows
+            dcmService = spawn(`./plugins/dcm4raccoon/dcmtk/dcmqrscp.exe`, ["-c", path.resolve("./plugins/dcm4raccoon/dcmqrscp.cfg"), configData.port])
+        }
+        else { // linux maybe?
+            dcmService = spawn(`./plugins/dcm4raccoon/dcmtk/dcmqrscp`, ["-c", path.resolve("./plugins/dcm4raccoon/dcmqrscp.cfg"), configData.port])
+        }
+        dcmService.on("spawn", (data) => onDCMStart(data));
+        dcmService.stdout.on('data', (data) => onDCMOutput(data));
+        dcmService.on("close", (data) => onDCMExit(data));
+    })
+    .catch((error) => {
+        console.error('[dcm4raccoon] Error:', error);
+    });
 
-    // Start the dcmqrscp.
-    console.log("[dcm4raccoon] Starting dcmqrscp.");
-    updateDcmqrscpMongoConfig();
-    var dcmService;
-	if (process.platform === "win32") { // windows
-		dcmService = spawn(`./plugins/dcm4raccoon/dcmtk/dcmqrscp.exe`, ["-c", path.resolve("./plugins/dcm4raccoon/dcmqrscp.cfg"), configData.port])
-	}
-	else { // linux maybe?
-		dcmService = spawn(`./plugins/dcm4raccoon/dcmtk/dcmqrscp`, ["-c", path.resolve("./plugins/dcm4raccoon/dcmqrscp.cfg"), configData.port])
-	}
-    dcmService.on("spawn", (data) => onDCMStart(data));
-    dcmService.stdout.on('data', (data) => onDCMOutput(data));
-    dcmService.on("close", (data) => onDCMExit(data));
 }
 
 function onDCMStart(data) {
@@ -88,11 +151,56 @@ function onDCMExit(data) {
     console.error(`[dcm4raccoon] Storescp exited, the message follows as below:\n${data}`);
     if (retryTimes < maxRetryTimes) {
         retryTimes += 1;
-        console.log(`[dcm4raccoon] dcmqrscp exited, restarting.`);
-        executeDCM();
+        if(!isShuttingDown) {
+            console.log(`[dcm4raccoon] dcmqrscp exited, restarting.`);
+            executeDCM();
+        }
     }
     else {
         console.error(`[dcm4raccoon] Cannot Start dcmqrscp.`);
         process.exit(1);
     }
 }
+
+function killProcess(processName) {
+    return new Promise((resolve, reject) => {
+      let killCommand = '';
+      if (process.platform === 'win32') {
+        killCommand = `taskkill /F /IM ${processName}`;
+      } else {
+        killCommand = `pkill ${processName}`;
+      }
+  
+      exec(killCommand, (error, stdout) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+  
+        resolve(stdout.toString().trim());
+      });
+    });
+}
+
+
+
+var rl = require("readline").createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+rl.on("SIGINT", function () {
+process.emit("SIGINT");
+});
+
+process.on( "SIGINT", async function() {
+    console.log( "\n[dcm4raccoon] Gracefully shutting down from SIGINT (Crtl-C)" );
+    isShuttingDown = true;
+    await cleanupDCM();
+    process.exit();
+});
+process.on( "exit", async function() {
+    console.log("[dcm4raccoon] Exiting");
+    isShuttingDown = true;
+    await cleanupDCM();
+});

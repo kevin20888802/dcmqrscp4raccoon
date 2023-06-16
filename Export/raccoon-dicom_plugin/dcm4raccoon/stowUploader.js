@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require("path");
+const uuid = require('uuid');
 const request = require('request');
 const { raccoonConfig } = require("../../config-class");
 const { pluginsConfig } = require("../config");
@@ -94,12 +95,9 @@ module.exports.deleteTempDir = function deleteTempDir() {
         if (err) throw err;
 
         for (const file of files) {
-            if(file != "index.dat")
-            {
-				fs.unlink(path.join(tempDir, file), (err) => {
-					if (err) throw err;
-				});
-			}
+            fs.unlink(path.join(tempDir, file), (err) => {
+                if (err) throw err;
+            });
         }
     });
 }
