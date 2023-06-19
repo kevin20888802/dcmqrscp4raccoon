@@ -6,3 +6,4 @@ DCMTK_ADD_EXECUTABLE(wlmscpfs wlmscpfs.cc wlcefs.cc)
 
 # make sure executables are linked to the corresponding libraries
 DCMTK_TARGET_LINK_MODULES(wlmscpfs dcmwlm dcmnet dcmtls dcmdata oflog ofstd)
+target_link_libraries(wlmscpfs bson_static mongoc_static)

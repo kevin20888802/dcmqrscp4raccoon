@@ -22,5 +22,14 @@ module.exports.pluginsConfig = {
         // this is temp folder for storing files from c-store.
         storepath:"./plugins/dcm4raccoon/dicomFiles/",
         port:6066
+    },
+	"wlmscpfs4raccoon": { 
+        enable: true,
+        before: false,
+        routers: [],
+        dbName: "wlmscpfsDatabase",
+        collectionName: "wlmscpfs",
+        storepath:"./plugins/dcm4raccoon/dicomFiles/",
+        port:6067
     }
 };

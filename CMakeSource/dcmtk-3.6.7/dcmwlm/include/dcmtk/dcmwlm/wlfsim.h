@@ -22,6 +22,7 @@
 #ifndef WlmFileSystemInteractionManager_h
 #define WlmFileSystemInteractionManager_h
 
+#include "../../../mongo-c-driver-1.23.3/src/libmongoc/src/mongoc/mongoc.h"
 #include "dcmtk/config/osconfig.h"
 #include "dcmtk/ofstd/ofstring.h"
 #include "dcmtk/ofstd/oftypes.h"   /* for OFBool */
@@ -215,6 +216,7 @@ class DCMTK_DCMWLM_EXPORT WlmFileSystemInteractionManager
        */
     size_t DetermineMatchingRecords( DcmDataset* searchMask );
 
+    bson_t* GetFindQuery(DcmDataset searchMask);
       /** Determine whether a Worklist file matches the search mask.
        *  @param searchMask A reference to the search mask.
        *  @param  worklistFile An OFpath (hopefully) referring to a Worklist
