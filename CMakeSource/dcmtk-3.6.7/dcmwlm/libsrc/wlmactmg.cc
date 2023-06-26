@@ -450,7 +450,6 @@ OFCondition WlmActivityManager::WaitForAssociation(T_ASC_Network* net)
         return(EC_Normal);
     }
     std::cout.flush();
-    std::cout << "asdasdasdwwww" << std::endl;
     // Condition 3: if option "--reject" is set and the caller did not provide an
     // implementation class UID we want to refuse the association request
     if (opt_rejectWithoutImplementationUID && strlen(assoc->params->theirImplementationClassUID) == 0)

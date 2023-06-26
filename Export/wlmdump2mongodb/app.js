@@ -5,20 +5,22 @@ const MongoClient = require('mongodb').MongoClient;
 // 讀取cfg檔案內容
 function readConfigFile() {
   try {
-    const configFile = fs.readFileSync('./wlmdump2mongodb.cfg', 'utf8');
-    const lines = configFile.split('\n');
+    const configContent = fs.readFileSync('./wlmdump2mongodb.cfg', 'utf-8');
+    const configLines = configContent.split('\n');
     const config = {};
 
-    lines.forEach((line) => {
-      const [key, value] = line.split('=');
-      if (key && value) {
-        config[key.trim()] = value.trim();
+    for (const line of configLines) {
+      const equalIndex = line.indexOf('=');
+      if (equalIndex !== -1) {
+        const key = line.substring(0, equalIndex).trim();
+        const value = line.substring(equalIndex + 1).trim();
+        config[key] = value;
       }
-    });
+    }
 
     return config;
   } catch (error) {
-    console.error('讀取配置檔失敗:', error);
+    console.error('讀取設定檔案時發生錯誤:', error);
     return null;
   }
 }
@@ -26,6 +28,7 @@ function readConfigFile() {
 // 連接至MongoDB資料庫
 async function connectToMongoDB(connString, dbName) {
   try {
+	  console.log("connString=" + connString);
     const client = await MongoClient.connect(connString, { useUnifiedTopology: true });
     const db = client.db(dbName);
     console.log('連接至MongoDB成功');
